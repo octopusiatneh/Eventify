@@ -1,10 +1,14 @@
-﻿using Eventify.Modules.Events.Application.Abstractions.Data;
+﻿using System.Reflection;
+using Eventify.Modules.Events.Application.Abstractions.CQRS;
+using Eventify.Modules.Events.Application.Abstractions.Data;
 using Eventify.Modules.Events.Application.Events;
 using Eventify.Modules.Events.Domain.Events;
+using Eventify.Modules.Events.Infrastructure.CQRS;
 using Eventify.Modules.Events.Infrastructure.Data;
 using Eventify.Modules.Events.Infrastructure.Database;
 using Eventify.Modules.Events.Infrastructure.Events;
 using Eventify.Modules.Events.Presentation.Events;
+using FluentValidation;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -39,6 +43,11 @@ public static class EventsModule
                         .MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Events))
                 .UseSnakeCaseNamingConvention());
 
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+        services.AddScoped<ICommandBus, CommandBus>();
+        services.AddScoped<IQueryBus, QueryBus>();
         services.AddScoped<IEventRepository, EventRepository>();
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<EventsDbContext>());
 

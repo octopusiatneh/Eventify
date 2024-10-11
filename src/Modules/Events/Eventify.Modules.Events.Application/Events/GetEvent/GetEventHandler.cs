@@ -2,9 +2,7 @@
 using Dapper;
 using MediatR;
 
-namespace Eventify.Modules.Events.Application.Events;
-
-public sealed record GetEventQuery(Guid EventId) : IRequest<EventResponse?>;
+namespace Eventify.Modules.Events.Application.Events.GetEvent;
 
 public sealed class GetEventHandler : IRequestHandler<GetEventQuery, EventResponse?>
 {
@@ -17,7 +15,7 @@ public sealed class GetEventHandler : IRequestHandler<GetEventQuery, EventRespon
 
     public async Task<EventResponse?> Handle(GetEventQuery request, CancellationToken cancellationToken)
     {
-        await using DbConnection dbConnection = await _dbConnectionFactory.OpenConnectionAsync();
+        await using var dbConnection = await _dbConnectionFactory.OpenConnectionAsync();
         const string sql =
             $"""
              SELECT
@@ -37,11 +35,3 @@ public sealed class GetEventHandler : IRequestHandler<GetEventQuery, EventRespon
         return @event;
     }
 }
-
-public sealed record EventResponse(
-    Guid Id,
-    string Title,
-    string Description,
-    string Location,
-    DateTime StartsAtUtc,
-    DateTime? EndsAtUtc);

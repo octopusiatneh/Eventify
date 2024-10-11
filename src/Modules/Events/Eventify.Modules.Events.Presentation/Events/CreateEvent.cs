@@ -1,4 +1,4 @@
-﻿using Eventify.Modules.Events.Application.Events;
+﻿using Eventify.Modules.Events.Application.Events.CreateEvent;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

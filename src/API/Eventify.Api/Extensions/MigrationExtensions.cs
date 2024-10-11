@@ -1,4 +1,4 @@
-﻿using Eventify.Modules.Events.Api.Database;
+﻿using Eventify.Modules.Events.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Eventify.Api.Extensions;
