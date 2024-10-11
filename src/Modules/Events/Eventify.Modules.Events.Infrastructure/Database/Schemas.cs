@@ -1,4 +1,4 @@
-﻿namespace Eventify.Modules.Events.Api.Database;
+﻿namespace Eventify.Modules.Events.Infrastructure.Database;
 
 internal static class Schemas
 {

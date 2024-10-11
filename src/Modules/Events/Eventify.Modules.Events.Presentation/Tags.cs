@@ -1,4 +1,4 @@
-﻿namespace Eventify.Modules.Events.Api;
+﻿namespace Eventify.Modules.Events.Presentation;
 
 internal static class Tags
 {

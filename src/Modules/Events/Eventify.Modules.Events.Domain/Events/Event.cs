@@ -1,4 +1,4 @@
-﻿namespace Eventify.Modules.Events.Api.Events;
+﻿namespace Eventify.Modules.Events.Domain.Events;
 
 public sealed class Event
 {

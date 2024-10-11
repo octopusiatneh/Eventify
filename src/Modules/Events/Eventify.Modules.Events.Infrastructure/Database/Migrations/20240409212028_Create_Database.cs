@@ -24,8 +24,8 @@ namespace Eventify.Modules.Events.Api.Database.Migrations
                     title = table.Column<string>(type: "text", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
                     location = table.Column<string>(type: "text", nullable: false),
-                    starts_at_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    ends_at_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    starts_at_Utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ends_at_Utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     status = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
