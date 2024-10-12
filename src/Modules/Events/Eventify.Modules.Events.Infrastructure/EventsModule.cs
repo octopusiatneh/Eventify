@@ -1,9 +1,7 @@
 ﻿using System.Reflection;
-using Eventify.Modules.Events.Application.Abstractions.CQRS;
 using Eventify.Modules.Events.Application.Abstractions.Data;
 using Eventify.Modules.Events.Application.Abstractions.Database;
 using Eventify.Modules.Events.Domain.Events;
-using Eventify.Modules.Events.Infrastructure.CQRS;
 using Eventify.Modules.Events.Infrastructure.Data;
 using Eventify.Modules.Events.Infrastructure.Database;
 using Eventify.Modules.Events.Infrastructure.Events;
@@ -46,8 +44,6 @@ public static class EventsModule
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-        services.AddScoped<ICommandBus, CommandBus>();
-        services.AddScoped<IQueryBus, QueryBus>();
         services.AddScoped<IEventRepository, EventRepository>();
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<EventsDbContext>());
 
