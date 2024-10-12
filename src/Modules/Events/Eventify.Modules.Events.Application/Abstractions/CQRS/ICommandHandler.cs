@@ -1,13 +1,10 @@
-﻿using MediatR;
+﻿using Eventify.Modules.Events.Domain.Abstractions;
+using MediatR;
 
 namespace Eventify.Modules.Events.Application.Abstractions.CQRS;
 
-public interface ICommandHandler<in TCommand> : IRequestHandler<TCommand>
-    where TCommand : ICommand
-{
-}
+public interface ICommandHandler<in TCommand> : IRequestHandler<TCommand, Result>
+    where TCommand : ICommand;
 
-public interface ICommandHandler<in TCommand, TResponse> : IRequestHandler<TCommand, TResponse>
-    where TCommand : ICommand<TResponse>
-{
-}
+public interface ICommandHandler<in TCommand, TResponse> : IRequestHandler<TCommand, Result<TResponse>>
+    where TCommand : ICommand<TResponse>;

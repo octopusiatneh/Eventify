@@ -1,10 +1,11 @@
-﻿using System.Data.Common;
-using Dapper;
-using MediatR;
+﻿using Dapper;
+using Eventify.Modules.Events.Application.Abstractions.CQRS;
+using Eventify.Modules.Events.Application.Abstractions.Database;
+using Eventify.Modules.Events.Domain.Abstractions;
 
 namespace Eventify.Modules.Events.Application.Events.GetEvent;
 
-public sealed class GetEventHandler : IRequestHandler<GetEventQuery, EventResponse?>
+public sealed class GetEventHandler : IQueryHandler<GetEventQuery, EventResponse>
 {
     private readonly IDbConnectionFactory _dbConnectionFactory;
 
@@ -13,7 +14,7 @@ public sealed class GetEventHandler : IRequestHandler<GetEventQuery, EventRespon
         _dbConnectionFactory = dbConnectionFactory;
     }
 
-    public async Task<EventResponse?> Handle(GetEventQuery request, CancellationToken cancellationToken)
+    public async Task<Result<EventResponse>> Handle(GetEventQuery request, CancellationToken cancellationToken)
     {
         await using var dbConnection = await _dbConnectionFactory.OpenConnectionAsync();
         const string sql =
@@ -26,7 +27,6 @@ public sealed class GetEventHandler : IRequestHandler<GetEventQuery, EventRespon
                  e.starts_at_utc AS {nameof(EventResponse.StartsAtUtc)},
                  e.ends_at_utc AS {nameof(EventResponse.EndsAtUtc)},
              FROM events.events e
-             LEFT JOIN events.ticket_types tt ON tt.event_id = e.id
              WHERE e.id = @EventId
              """;
 

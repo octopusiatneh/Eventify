@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Eventify.Modules.Events.Application.Abstractions.CQRS;
 using Eventify.Modules.Events.Application.Abstractions.Data;
-using Eventify.Modules.Events.Application.Events;
+using Eventify.Modules.Events.Application.Abstractions.Database;
 using Eventify.Modules.Events.Domain.Events;
 using Eventify.Modules.Events.Infrastructure.CQRS;
 using Eventify.Modules.Events.Infrastructure.Data;
@@ -30,8 +30,8 @@ public static class EventsModule
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        string databaseConnectionString = configuration.GetConnectionString("Database")!;
-        NpgsqlDataSource npgsqlDataSource = new NpgsqlDataSourceBuilder(databaseConnectionString).Build();
+        var databaseConnectionString = configuration.GetConnectionString("Database")!;
+        var npgsqlDataSource = new NpgsqlDataSourceBuilder(databaseConnectionString).Build();
 
         services.TryAddSingleton(npgsqlDataSource);
         services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();

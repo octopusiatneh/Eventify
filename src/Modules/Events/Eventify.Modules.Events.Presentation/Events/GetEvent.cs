@@ -1,4 +1,5 @@
 ﻿using Eventify.Modules.Events.Application.Events.GetEvent;
+using Eventify.Modules.Events.Presentation.WebApi;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -13,9 +14,9 @@ internal static class GetEvent
         app.MapGet("events/{id}", async (Guid id, ISender sender) =>
         {
             var query = new GetEventQuery(id);
-            var @event = await sender.Send(query);
+            var result = await sender.Send(query);
 
-            return @event is null ? Results.NotFound() : Results.Ok(@event);
+            return result.ToApiResponse(ApiResults.Ok, ApiResults.Problem);
         })
         .WithTags(Tags.Events);
     }

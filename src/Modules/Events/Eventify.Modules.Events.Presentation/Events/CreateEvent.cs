@@ -1,4 +1,5 @@
 ﻿using Eventify.Modules.Events.Application.Events.CreateEvent;
+using Eventify.Modules.Events.Presentation.WebApi;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -14,9 +15,9 @@ internal static class CreateEvent
         {
             var (title, description, location, startsAtUtc, endsAtUtc) = request;
             var command = new CreateEventCommand(title, description, location, startsAtUtc, endsAtUtc);
-            var eventId = await sender.Send(command);
+            var result = await sender.Send(command);
 
-            return Results.Ok(eventId);
+            return result.ToApiResponse(ApiResults.Ok, ApiResults.Problem);
         })
         .WithTags(Tags.Events);
     }

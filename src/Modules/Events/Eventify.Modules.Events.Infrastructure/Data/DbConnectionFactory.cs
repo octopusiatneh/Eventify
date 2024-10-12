@@ -1,5 +1,5 @@
 ﻿using System.Data.Common;
-using Eventify.Modules.Events.Application.Events;
+using Eventify.Modules.Events.Application.Abstractions.Database;
 using Npgsql;
 
 namespace Eventify.Modules.Events.Infrastructure.Data;
