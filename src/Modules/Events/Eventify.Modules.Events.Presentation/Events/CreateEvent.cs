@@ -13,8 +13,8 @@ internal static class CreateEvent
     {
         app.MapPost("events", async (Request request, ISender sender) =>
         {
-            var (title, description, location, startsAtUtc, endsAtUtc) = request;
-            var command = new CreateEventCommand(title, description, location, startsAtUtc, endsAtUtc);
+            var (categoryId, title, description, location, startsAtUtc, endsAtUtc) = request;
+            var command = new CreateEventCommand(categoryId, title, description, location, startsAtUtc, endsAtUtc);
             var result = await sender.Send(command);
 
             return result.ToApiResponse(ApiResults.Ok, ApiResults.Problem);
@@ -23,6 +23,7 @@ internal static class CreateEvent
     }
 
     internal sealed record Request(
+        Guid CategoryId,
         string Title,
         string Description,
         string Location,

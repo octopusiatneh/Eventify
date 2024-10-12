@@ -1,6 +1,7 @@
-﻿namespace Eventify.Modules.Events.Domain.Events;
+﻿
+namespace Eventify.Modules.Events.Domain.Events;
 
 public interface IEventRepository
 {
-    void Insert(Event @event);
+    Task InsertAsync(Event @event, CancellationToken cancellationToken = default);
 }

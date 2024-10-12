@@ -2,6 +2,7 @@
 using Eventify.Modules.Events.Infrastructure.Database;
 
 namespace Eventify.Modules.Events.Infrastructure.Events;
+
 internal sealed class EventRepository : IEventRepository
 {
     private readonly EventsDbContext _dbContext;
@@ -11,8 +12,8 @@ internal sealed class EventRepository : IEventRepository
         _dbContext = dbContext;
     }
 
-    public void Insert(Event @event)
+    public async Task InsertAsync(Event @event, CancellationToken cancellationToken = default)
     {
-        _dbContext.Events.Add(@event);
+        await _dbContext.Events.AddAsync(@event, cancellationToken);
     }
 }

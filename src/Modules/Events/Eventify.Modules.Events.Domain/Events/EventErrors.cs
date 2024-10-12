@@ -2,7 +2,7 @@
 
 namespace Eventify.Modules.Events.Domain.Events;
 
-internal class EventErrors
+public static class EventErrors
 {
     public static Error NotFound(Guid eventId) =>
         Error.NotFound("Events.NotFound", $"The event with the identifier {eventId} was not found");
