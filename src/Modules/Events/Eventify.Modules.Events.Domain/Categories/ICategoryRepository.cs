@@ -1,8 +1,5 @@
-﻿namespace Eventify.Modules.Events.Domain.Categories;
+﻿using Eventify.Modules.Events.Domain.Abstractions;
 
-public interface ICategoryRepository
-{
-    Task<Category> GetAsync(Guid id, CancellationToken cancellationToken = default);
-    
-    Task InsertAsync(Category category, CancellationToken cancellationToken = default);
-}
+namespace Eventify.Modules.Events.Domain.Categories;
+
+public interface ICategoryRepository : IRepositoryBase<Category>;

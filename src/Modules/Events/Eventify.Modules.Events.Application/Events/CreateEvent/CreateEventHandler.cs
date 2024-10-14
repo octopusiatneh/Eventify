@@ -38,7 +38,7 @@ internal sealed class CreateEventHandler : ICommandHandler<CreateEventCommand, G
         Event @event = result.Value;
         await _eventRepository.InsertAsync(@event, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        
+
         @event.Raise(new EventCreated(@event.Id));
 
         return @event.Id;

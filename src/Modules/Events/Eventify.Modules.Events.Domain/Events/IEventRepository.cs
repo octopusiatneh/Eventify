@@ -1,7 +1,5 @@
-﻿
+﻿using Eventify.Modules.Events.Domain.Abstractions;
+
 namespace Eventify.Modules.Events.Domain.Events;
 
-public interface IEventRepository
-{
-    Task InsertAsync(Event @event, CancellationToken cancellationToken = default);
-}
+public interface IEventRepository : IRepositoryBase<Event>;
