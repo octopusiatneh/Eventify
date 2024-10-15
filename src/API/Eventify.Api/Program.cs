@@ -1,5 +1,5 @@
 using Eventify.Api.Extensions;
-using Eventify.Modules.Events.Api;
+using Eventify.Modules.Events.Infrastructure;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -20,4 +20,4 @@ if (app.Environment.IsDevelopment())
 
 EventsModule.MapEndpoints(app);
 
-app.Run();
+await app.RunAsync();
