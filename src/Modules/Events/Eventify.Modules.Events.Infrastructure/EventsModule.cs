@@ -6,6 +6,7 @@ using Eventify.Modules.Events.Infrastructure.Categories;
 using Eventify.Modules.Events.Infrastructure.Database;
 using Eventify.Modules.Events.Infrastructure.Events;
 using Eventify.Modules.Events.Infrastructure.TicketTypes;
+using Eventify.Modules.Events.Presentation.Categories;
 using Eventify.Modules.Events.Presentation.Events;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ public static class EventsModule
     public static void MapEndpoints(IEndpointRouteBuilder app)
     {
         EventEndpoints.MapEndpoints(app);
+        CategoryEndpoints.MapEndpoints(app);
     }
 
     public static IServiceCollection AddEventsModule(

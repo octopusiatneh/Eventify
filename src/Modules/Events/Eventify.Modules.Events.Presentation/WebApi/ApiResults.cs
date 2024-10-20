@@ -5,9 +5,7 @@ namespace Eventify.Modules.Events.Presentation.WebApi;
 
 public sealed class ApiResults
 {
-    public static IResult Ok() => Results.Ok();
-
-    public static IResult Ok<TValue>(Result<TValue> result) => Results.Ok(result.Value);
+    public static IResult Ok<TValue>(TValue? value = default) => value is null ? Results.Ok() : Results.Ok(value);
 
     public static IResult Problem(Result result)
     {

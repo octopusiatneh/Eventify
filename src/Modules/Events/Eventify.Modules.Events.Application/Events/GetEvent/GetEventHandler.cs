@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Eventify.Modules.Events.Domain.Events;
 using Eventify.Shared.Application.CQRS;
 using Eventify.Shared.Application.Database;
 using Eventify.Shared.Domain;
@@ -25,12 +26,17 @@ public sealed class GetEventHandler : IQueryHandler<GetEventQuery, EventResponse
                  e.description AS {nameof(EventResponse.Description)},
                  e.location AS {nameof(EventResponse.Location)},
                  e.starts_at_utc AS {nameof(EventResponse.StartsAtUtc)},
-                 e.ends_at_utc AS {nameof(EventResponse.EndsAtUtc)},
+                 e.ends_at_utc AS {nameof(EventResponse.EndsAtUtc)}
              FROM events.events e
              WHERE e.id = @EventId
              """;
 
         EventResponse? @event = await dbConnection.QuerySingleOrDefaultAsync(sql, request);
+
+        if (@event is null)
+        {
+            return Result.Failure<EventResponse>(EventErrors.NotFound(request.EventId));
+        }
 
         return @event;
     }
