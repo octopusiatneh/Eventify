@@ -1,4 +1,4 @@
-﻿using Eventify.Modules.Events.Application.Abstractions.CQRS;
+﻿using Eventify.Shared.Application.CQRS;
 
 namespace Eventify.Modules.Events.Application.TicketTypes.CreateTicketType;
 

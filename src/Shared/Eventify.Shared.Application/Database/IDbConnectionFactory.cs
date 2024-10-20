@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace Eventify.Modules.Events.Application.Abstractions.Database;
+namespace Eventify.Shared.Application.Database;
 
 public interface IDbConnectionFactory
 {

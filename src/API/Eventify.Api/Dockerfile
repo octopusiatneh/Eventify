@@ -7,8 +7,15 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+COPY ["Directory.Build.props", "."]
 COPY ["src/API/Eventify.Api/Eventify.Api.csproj", "src/API/Eventify.Api/"]
+COPY ["src/Modules/Events/Eventify.Modules.Events.Infrastructure/Eventify.Modules.Events.Infrastructure.csproj", "src/Modules/Events/Eventify.Modules.Events.Infrastructure/"]
+COPY ["src/Modules/Events/Eventify.Modules.Events.Application/Eventify.Modules.Events.Application.csproj", "src/Modules/Events/Eventify.Modules.Events.Application/"]
+COPY ["src/Modules/Events/Eventify.Modules.Events.Domain/Eventify.Modules.Events.Domain.csproj", "src/Modules/Events/Eventify.Modules.Events.Domain/"]
+COPY ["src/Modules/Events/Eventify.Modules.Events.Presentation/Eventify.Modules.Events.Presentation.csproj", "src/Modules/Events/Eventify.Modules.Events.Presentation/"]
+
 RUN dotnet restore "./src/API/Eventify.Api/Eventify.Api.csproj"
+
 COPY . .
 WORKDIR "/src/src/API/Eventify.Api"
 RUN dotnet build "./Eventify.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build

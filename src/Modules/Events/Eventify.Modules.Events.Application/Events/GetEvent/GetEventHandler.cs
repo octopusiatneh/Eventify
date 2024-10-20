@@ -1,7 +1,7 @@
 ﻿using Dapper;
-using Eventify.Modules.Events.Application.Abstractions.CQRS;
-using Eventify.Modules.Events.Application.Abstractions.Database;
-using Eventify.Modules.Events.Domain.Abstractions;
+using Eventify.Shared.Application.CQRS;
+using Eventify.Shared.Application.Database;
+using Eventify.Shared.Domain;
 
 namespace Eventify.Modules.Events.Application.Events.GetEvent;
 

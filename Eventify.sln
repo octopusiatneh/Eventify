@@ -29,11 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Modules.Events.Dom
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{DC4AFCAF-403A-4513-A1CF-4B6B9D4D274E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Shared.Application", "src\Shared\Eventify.Shared.Application\Eventify.Shared.Application.csproj", "{F7E35389-0822-48A3-B8B7-21A023E348E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Shared.Application", "src\Shared\Eventify.Shared.Application\Eventify.Shared.Application.csproj", "{F7E35389-0822-48A3-B8B7-21A023E348E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Shared.Infrastructure", "src\Shared\Eventify.Shared.Infrastructure\Eventify.Shared.Infrastructure.csproj", "{CEBC5397-5261-4E91-BD51-0793FC1A936B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Shared.Infrastructure", "src\Shared\Eventify.Shared.Infrastructure\Eventify.Shared.Infrastructure.csproj", "{CEBC5397-5261-4E91-BD51-0793FC1A936B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Shared.Domain", "Eventify.Shared.Domain\Eventify.Shared.Domain.csproj", "{CF2EBFDB-5DAD-4B78-A262-CF133863BFC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Shared.Domain", "src\Shared\Eventify.Shared.Domain\Eventify.Shared.Domain.csproj", "{CF2EBFDB-5DAD-4B78-A262-CF133863BFC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

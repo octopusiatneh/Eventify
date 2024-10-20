@@ -1,8 +1,8 @@
 ﻿using System.Data.Common;
-using Eventify.Modules.Events.Application.Abstractions.Database;
+using Eventify.Shared.Application.Database;
 using Npgsql;
 
-namespace Eventify.Modules.Events.Infrastructure.Data;
+namespace Eventify.Shared.Infrastructure.Data;
 
 public sealed class DbConnectionFactory(NpgsqlDataSource dataSource) : IDbConnectionFactory
 {

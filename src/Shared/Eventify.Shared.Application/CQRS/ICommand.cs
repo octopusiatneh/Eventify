@@ -1,7 +1,7 @@
-﻿using Eventify.Modules.Events.Domain.Abstractions;
+﻿using Eventify.Shared.Domain;
 using MediatR;
 
-namespace Eventify.Modules.Events.Application.Abstractions.CQRS;
+namespace Eventify.Shared.Application.CQRS;
 
 public interface IBaseCommand;
 

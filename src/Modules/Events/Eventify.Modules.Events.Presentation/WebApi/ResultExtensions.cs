@@ -1,4 +1,4 @@
-﻿using Eventify.Modules.Events.Domain.Abstractions;
+﻿using Eventify.Shared.Domain;
 
 namespace Eventify.Modules.Events.Presentation.WebApi;
 

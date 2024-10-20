@@ -1,5 +1,5 @@
-﻿using Eventify.Modules.Events.Domain.Abstractions;
-using Eventify.Modules.Events.Domain.Events;
+﻿using Eventify.Modules.Events.Domain.Events;
+using Eventify.Shared.Domain;
 
 namespace Eventify.Modules.Events.Domain.TicketTypes;
 
