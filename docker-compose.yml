@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   eventify.api:
     image: ${DOCKER_REGISTRY-}eventifyapi
@@ -7,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: src/API/Eventify.Api/Dockerfile
+    depends_on:
+     - eventify.database
     ports:
       - 5000:8080
       - 5001:8081

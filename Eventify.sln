@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Shared.Infrastruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Shared.Domain", "src\Shared\Eventify.Shared.Domain\Eventify.Shared.Domain.csproj", "{CF2EBFDB-5DAD-4B78-A262-CF133863BFC6}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{50098BB7-E11D-4071-B91F-DD1CD37A2F6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{CF2EBFDB-5DAD-4B78-A262-CF133863BFC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF2EBFDB-5DAD-4B78-A262-CF133863BFC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF2EBFDB-5DAD-4B78-A262-CF133863BFC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50098BB7-E11D-4071-B91F-DD1CD37A2F6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50098BB7-E11D-4071-B91F-DD1CD37A2F6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50098BB7-E11D-4071-B91F-DD1CD37A2F6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50098BB7-E11D-4071-B91F-DD1CD37A2F6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

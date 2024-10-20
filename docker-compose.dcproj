@@ -4,11 +4,11 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>1b2beccc-dace-4b71-a00d-a546710ee958</ProjectGuid>
+    <ProjectGuid>50098bb7-e11d-4071-b91f-dd1cd37a2f6a</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>eventify.api</DockerServiceName>
-    <DockerComposeProjectName>eventify</DockerComposeProjectName>
+	<DockerComposeProjectName>eventify</DockerComposeProjectName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
