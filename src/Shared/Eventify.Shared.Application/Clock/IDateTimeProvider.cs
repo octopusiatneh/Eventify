@@ -1,4 +1,4 @@
-﻿namespace Eventify.Modules.Events.Application.Abstractions.Clock;
+﻿namespace Eventify.Shared.Application.Clock;
 
 public interface IDateTimeProvider
 {

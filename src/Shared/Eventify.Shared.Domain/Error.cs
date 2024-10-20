@@ -1,4 +1,4 @@
-﻿namespace Eventify.Modules.Events.Domain.Abstractions;
+﻿namespace Eventify.Shared.Domain;
 
 public record Error(string Code, string Message, ErrorType Type)
 {

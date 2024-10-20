@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Eventify.Modules.Events.Domain.Abstractions;
+namespace Eventify.Shared.Domain;
 
 public class Result
 {

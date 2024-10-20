@@ -12,7 +12,7 @@ internal static class CreateCategory
     {
         app.MapPost("categories", async (Request request, ISender sender) =>
         {
-            var result = await sender.Send(new CreateTicketTypeCommand(request.Name));
+            var result = await sender.Send(new CreateCategoryCommand(request.Name));
 
             return result.ToApiResponse(ApiResults.Ok, ApiResults.Problem);
 

@@ -1,5 +1,5 @@
-﻿using Eventify.Modules.Events.Application.Abstractions.CQRS;
+﻿using Eventify.Shared.Application.CQRS;
 
 namespace Eventify.Modules.Events.Application.Categories.CreateCategory;
 
-public sealed record CreateTicketTypeCommand(string Name) : ICommand<Guid>;
+public sealed record CreateCategoryCommand(string Name) : ICommand<Guid>;

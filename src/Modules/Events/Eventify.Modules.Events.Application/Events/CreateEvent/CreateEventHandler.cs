@@ -1,8 +1,8 @@
-﻿using Eventify.Modules.Events.Application.Abstractions.CQRS;
-using Eventify.Modules.Events.Application.Abstractions.Data;
-using Eventify.Modules.Events.Domain.Abstractions;
+﻿using Eventify.Modules.Events.Application.Abstractions.Data;
 using Eventify.Modules.Events.Domain.Categories;
 using Eventify.Modules.Events.Domain.Events;
+using Eventify.Shared.Application.CQRS;
+using Eventify.Shared.Domain;
 
 namespace Eventify.Modules.Events.Application.Events.CreateEvent;
 

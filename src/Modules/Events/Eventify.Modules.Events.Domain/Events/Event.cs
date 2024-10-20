@@ -1,5 +1,5 @@
-﻿using Eventify.Modules.Events.Domain.Abstractions;
-using Eventify.Modules.Events.Domain.Categories;
+﻿using Eventify.Modules.Events.Domain.Categories;
+using Eventify.Shared.Domain;
 
 namespace Eventify.Modules.Events.Domain.Events;
 
