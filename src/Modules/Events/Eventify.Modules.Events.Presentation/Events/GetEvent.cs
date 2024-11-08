@@ -1,5 +1,4 @@
 ﻿using Eventify.Modules.Events.Application.Events.GetEvent;
-using Eventify.Modules.Events.Presentation.WebApi;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;

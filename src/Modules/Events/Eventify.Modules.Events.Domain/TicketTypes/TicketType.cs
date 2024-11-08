@@ -42,7 +42,5 @@ public sealed class TicketType : Entity
         }
 
         Price = price;
-
-        Raise(new TicketTypePriceChanged(Id, Price));
     }
 }

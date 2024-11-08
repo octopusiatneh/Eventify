@@ -7,4 +7,4 @@ public sealed record CreateTicketTypeCommand(
     string Name,
     decimal Price,
     string Currency,
-    decimal Quantity) : ICommand<Guid>;
+    int Quantity) : ICommand<Guid>;

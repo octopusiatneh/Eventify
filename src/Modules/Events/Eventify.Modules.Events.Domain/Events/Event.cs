@@ -25,7 +25,7 @@ public sealed class Event : Entity
 
     public EventStatus Status { get; private set; }
 
-    public static Result<Event> Create(Category category,
+    public static Event Create(Category category,
                                        string title,
                                        string description,
                                        string location,
@@ -43,8 +43,6 @@ public sealed class Event : Entity
             EndsAtUtc = endsAtUtc,
             Status = EventStatus.Draft
         };
-
-        @event.Raise(new EventCreated(@event.Id));
 
         return @event;
     }

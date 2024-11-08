@@ -1,6 +1,6 @@
 ﻿using Eventify.Shared.Domain;
 
-namespace Eventify.Modules.Events.Presentation.WebApi;
+namespace Eventify.Shared.Presentation.WebApi;
 
 public static class ResultExtensions
 {

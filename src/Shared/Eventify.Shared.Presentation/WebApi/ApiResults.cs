@@ -1,7 +1,7 @@
 ﻿using Eventify.Shared.Domain;
 using Microsoft.AspNetCore.Http;
 
-namespace Eventify.Modules.Events.Presentation.WebApi;
+namespace Eventify.Shared.Presentation.WebApi;
 
 public sealed class ApiResults
 {

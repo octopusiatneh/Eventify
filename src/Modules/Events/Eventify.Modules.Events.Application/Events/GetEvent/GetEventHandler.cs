@@ -38,6 +38,6 @@ public sealed class GetEventHandler : IQueryHandler<GetEventQuery, EventResponse
             return Result.Failure<EventResponse>(EventErrors.NotFound(request.EventId));
         }
 
-        return @event;
+        return @event!;
     }
 }

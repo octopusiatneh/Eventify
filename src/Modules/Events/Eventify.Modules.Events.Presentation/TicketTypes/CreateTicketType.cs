@@ -1,5 +1,4 @@
 ﻿using Eventify.Modules.Events.Application.TicketTypes.CreateTicketType;
-using Eventify.Modules.Events.Presentation.WebApi;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -25,5 +24,5 @@ internal static class CreateTicketType
         .WithTags(Tags.TicketTypes);
     }
 
-    internal sealed record Request(Guid EventId, string Name, decimal Price, string Currency, decimal Quantity);
+    internal sealed record Request(Guid EventId, string Name, decimal Price, string Currency, int Quantity);
 }
