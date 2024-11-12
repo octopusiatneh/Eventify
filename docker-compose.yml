@@ -27,8 +27,9 @@ services:
       context: .
       dockerfile: src/API/Eventify.Api/Dockerfile
     depends_on:
-      - eventify.database
-      - eventify.seq
+      eventify.database:
+        condition: service_healthy
+        restart: true
     ports:
       - 5000:8080
       - 5001:8081
