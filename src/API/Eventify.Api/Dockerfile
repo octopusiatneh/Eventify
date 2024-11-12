@@ -12,15 +12,27 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+
 COPY ["Directory.Build.props", "."]
 COPY ["src/API/Eventify.Api/Eventify.Api.csproj", "src/API/Eventify.Api/"]
-COPY ["src/Modules/Events/Eventify.Modules.Events.Infrastructure/Eventify.Modules.Events.Infrastructure.csproj", "src/Modules/Events/Eventify.Modules.Events.Infrastructure/"]
-COPY ["src/Shared/Eventify.Shared.Infrastructure/Eventify.Shared.Infrastructure.csproj", "src/Shared/Eventify.Shared.Infrastructure/"]
+# Shared projects
 COPY ["src/Shared/Eventify.Shared.Application/Eventify.Shared.Application.csproj", "src/Shared/Eventify.Shared.Application/"]
 COPY ["src/Shared/Eventify.Shared.Domain/Eventify.Shared.Domain.csproj", "src/Shared/Eventify.Shared.Domain/"]
+COPY ["src/Shared/Eventify.Shared.Infrastructure/Eventify.Shared.Infrastructure.csproj", "src/Shared/Eventify.Shared.Infrastructure/"]
+COPY ["src/Shared/Eventify.Shared.Presentation/Eventify.Shared.Presentation.csproj", "src/Shared/Eventify.Shared.Presentation/"]
+
+# Events module
 COPY ["src/Modules/Events/Eventify.Modules.Events.Application/Eventify.Modules.Events.Application.csproj", "src/Modules/Events/Eventify.Modules.Events.Application/"]
 COPY ["src/Modules/Events/Eventify.Modules.Events.Domain/Eventify.Modules.Events.Domain.csproj", "src/Modules/Events/Eventify.Modules.Events.Domain/"]
+COPY ["src/Modules/Events/Eventify.Modules.Events.Infrastructure/Eventify.Modules.Events.Infrastructure.csproj", "src/Modules/Events/Eventify.Modules.Events.Infrastructure/"]
 COPY ["src/Modules/Events/Eventify.Modules.Events.Presentation/Eventify.Modules.Events.Presentation.csproj", "src/Modules/Events/Eventify.Modules.Events.Presentation/"]
+
+# Users module
+COPY ["src/Modules/Users/Eventify.Modules.Users.Application/Eventify.Modules.Users.Application.csproj", "src/Modules/Users/Eventify.Modules.Users.Application/"]
+COPY ["src/Modules/Users/Eventify.Modules.Users.Domain/Eventify.Modules.Users.Domain.csproj", "src/Modules/Users/Eventify.Modules.Users.Domain/"]
+COPY ["src/Modules/Users/Eventify.Modules.Users.Infrastructure/Eventify.Modules.Users.Infrastructure.csproj", "src/Modules/Users/Eventify.Modules.Users.Infrastructure/"]
+COPY ["src/Modules/Users/Eventify.Modules.Users.Presentation/Eventify.Modules.Users.Presentation.csproj", "src/Modules/Users/Eventify.Modules.Users.Presentation/"]
+
 RUN dotnet restore "./src/API/Eventify.Api/Eventify.Api.csproj"
 COPY . .
 WORKDIR "/src/src/API/Eventify.Api"
