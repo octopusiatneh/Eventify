@@ -31,7 +31,7 @@ public sealed class GetEventHandler : IQueryHandler<GetEventQuery, EventResponse
              WHERE e.id = @EventId
              """;
 
-        EventResponse? @event = await dbConnection.QuerySingleOrDefaultAsync(sql, request);
+        EventResponse? @event = await dbConnection.QuerySingleOrDefaultAsync<EventResponse>(sql, request);
 
         if (@event is null)
         {
