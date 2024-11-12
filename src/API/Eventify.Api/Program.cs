@@ -1,6 +1,7 @@
 using Eventify.Api.Extensions;
 using Eventify.Api.Middlewares;
 using Eventify.Modules.Events.Infrastructure;
+using Eventify.Modules.Users.Infrastructure;
 using Eventify.Shared.Application;
 using Eventify.Shared.Infrastructure;
 using Serilog;
@@ -15,14 +16,16 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => options.CustomSchemaIds(t => t.FullName?.Replace("+", ".")));
 
-// Add cross-cutting concerns
+// Add Cross-Cutting concerns
 builder.Services.AddSharedApplicationConfig([
-    Eventify.Modules.Events.Application.AssemblyReference.Assembly
+    Eventify.Modules.Events.Application.AssemblyReference.Assembly,
+    Eventify.Modules.Users.Application.AssemblyReference.Assembly,
 ]);
 builder.Services.AddSharedInfrastructureConfig(builder.Configuration);
 
-// Add modules
+// Add Modules
 builder.Services.AddEventsModule(builder.Configuration);
+builder.Services.AddUsersModule(builder.Configuration);
 
 WebApplication app = builder.Build();
 
@@ -35,6 +38,7 @@ if (app.Environment.IsDevelopment())
 }
 
 EventsModule.MapEndpoints(app);
+UsersModule.MapEndpoints(app);
 
 app.UseSerilogRequestLogging();
 app.UseExceptionHandler();

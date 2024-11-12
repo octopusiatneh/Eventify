@@ -1,6 +1,7 @@
 ﻿using Eventify.Modules.Events.Application.Categories.CreateCategory;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
 namespace Eventify.Modules.Events.Presentation.Categories;
@@ -15,7 +16,8 @@ internal static class CreateCategory
 
             return result.ToApiResponse(ApiResults.Ok, ApiResults.Problem);
 
-        });
+        })
+        .WithTags(Tags.Categories);
     }
 
     internal sealed record Request(string Name);
