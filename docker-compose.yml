@@ -8,6 +8,7 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - ./.containers/db:/var/lib/postgresql/data
+    restart: always
     ports:
       - 5432:5432
 
@@ -18,7 +19,13 @@ services:
       - ACCEPT_EULA=Y
     ports:
       - 5341:5341
-      - 8081:80
+
+  eventify.redis:
+    image: redis:latest
+    container_name: Eventify.Redis
+    restart: always
+    ports:
+      - 6379:6379
 
   eventify.api:
     image: ${DOCKER_REGISTRY-}eventifyapi
@@ -27,6 +34,8 @@ services:
       context: .
       dockerfile: src/API/Eventify.Api/Dockerfile
     depends_on:
+      eventify.redis:
+        condition: service_started
       eventify.database:
         condition: service_healthy
         restart: true

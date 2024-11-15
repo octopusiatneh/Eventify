@@ -1,5 +1,7 @@
-﻿using Eventify.Shared.Application.Clock;
+﻿using Eventify.Shared.Application.Caching;
+using Eventify.Shared.Application.Clock;
 using Eventify.Shared.Application.Database;
+using Eventify.Shared.Infrastructure.Caching;
 using Eventify.Shared.Infrastructure.Clock;
 using Eventify.Shared.Infrastructure.Data;
 using Eventify.Shared.Infrastructure.Options;
@@ -7,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Npgsql;
+using StackExchange.Redis;
 
 namespace Eventify.Shared.Infrastructure;
 
@@ -20,12 +23,29 @@ public static class SharedInfrastructureConfiguration
             opts => configuration.GetSection(DbConnectionStringOptions.DbConnectionString)
         );
         services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
-        services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
+        services.TryAddSingleton<IDateTimeProvider, DateTimeProvider>();
 
+        RegisterPostgres(configuration, services);
+        RegisterCaching(configuration, services);
+
+        return services;
+    }
+
+    private static void RegisterPostgres(IConfiguration configuration, IServiceCollection services)
+    {
         var dbConnectionString = configuration.GetConnectionString("Database")!;
         var npgsqlDataSource = new NpgsqlDataSourceBuilder(dbConnectionString).Build();
         services.TryAddSingleton(npgsqlDataSource);
+    }
 
-        return services;
+    private static void RegisterCaching(IConfiguration configuration, IServiceCollection services)
+    {
+        var redisConnectionString = configuration.GetConnectionString("Redis")!;
+        var connectionMultiplexer = ConnectionMultiplexer.Connect(redisConnectionString);
+        services.TryAddSingleton(connectionMultiplexer);
+        services.AddStackExchangeRedisCache(options
+            => options.ConnectionMultiplexerFactory = () => Task.FromResult<IConnectionMultiplexer>(connectionMultiplexer));
+
+        services.TryAddSingleton<ICacheService, CacheService>();
     }
 }
