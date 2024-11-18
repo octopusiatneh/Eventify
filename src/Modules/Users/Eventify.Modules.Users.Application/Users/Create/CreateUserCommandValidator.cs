@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Eventify.Modules.Users.Application.Users.Create;
+namespace Eventify.Modules.Users.Presentation.Users.Create;
 
 internal sealed class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {

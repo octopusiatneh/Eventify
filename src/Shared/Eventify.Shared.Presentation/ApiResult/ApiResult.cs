@@ -1,9 +1,9 @@
 ﻿using Eventify.Shared.Domain;
 using Microsoft.AspNetCore.Http;
 
-namespace Eventify.Shared.Presentation.WebApi;
+namespace Eventify.Shared.Presentation.ApiResult;
 
-public sealed class ApiResults
+public sealed class ApiResult
 {
     public static IResult Ok<TValue>(TValue? value = default) => value is null ? Results.Ok() : Results.Ok(value);
 

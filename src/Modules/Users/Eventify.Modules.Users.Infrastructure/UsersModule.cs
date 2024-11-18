@@ -1,9 +1,8 @@
-﻿using Eventify.Modules.Users.Application.Abstractions.Data;
-using Eventify.Modules.Users.Domain.Users;
+﻿using Eventify.Modules.Users.Domain.Users;
 using Eventify.Modules.Users.Infrastructure.Database;
 using Eventify.Modules.Users.Infrastructure.Users;
-using Eventify.Modules.Users.Presentation.Users;
-using Microsoft.AspNetCore.Routing;
+using Eventify.Modules.Users.Presentation.Abstractions.Data;
+using Eventify.Shared.Presentation.Endpoints;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
@@ -13,16 +12,12 @@ namespace Eventify.Modules.Users.Infrastructure;
 
 public static class UsersModule
 {
-    public static void MapEndpoints(IEndpointRouteBuilder app)
-    {
-        UserEndpoints.MapEndpoints(app);
-    }
-
     public static IServiceCollection AddUsersModule(
         this IServiceCollection services,
         IConfiguration configuration)
     {
         services.AddInfrastructure(configuration);
+        services.AddEndpoints(Presentation.AssemblyReference.Assembly);
 
         return services;
     }

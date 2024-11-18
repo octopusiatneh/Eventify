@@ -1,4 +1,4 @@
-﻿using Eventify.Modules.Users.Application.Abstractions.Data;
+﻿using Eventify.Modules.Users.Presentation.Abstractions.Data;
 using Eventify.Modules.Users.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 

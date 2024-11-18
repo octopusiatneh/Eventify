@@ -4,6 +4,7 @@ using Eventify.Modules.Events.Infrastructure;
 using Eventify.Modules.Users.Infrastructure;
 using Eventify.Shared.Application;
 using Eventify.Shared.Infrastructure;
+using Eventify.Shared.Presentation.Endpoints;
 using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -19,7 +20,7 @@ builder.Services.AddSwaggerGen(options => options.CustomSchemaIds(t => t.FullNam
 // Add Cross-Cutting concerns
 builder.Services.AddSharedApplicationConfig([
     Eventify.Modules.Events.Application.AssemblyReference.Assembly,
-    Eventify.Modules.Users.Application.AssemblyReference.Assembly,
+    Eventify.Modules.Users.Presentation.AssemblyReference.Assembly,
 ]);
 builder.Services.AddSharedInfrastructureConfig(builder.Configuration);
 
@@ -37,9 +38,7 @@ if (app.Environment.IsDevelopment())
     app.ApplyMigrations();
 }
 
-EventsModule.MapEndpoints(app);
-UsersModule.MapEndpoints(app);
-
+app.MapEndpoints();
 app.UseSerilogRequestLogging();
 app.UseExceptionHandler();
 

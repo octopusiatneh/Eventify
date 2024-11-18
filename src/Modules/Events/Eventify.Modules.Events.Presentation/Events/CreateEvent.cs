@@ -1,4 +1,5 @@
-﻿using Eventify.Modules.Events.Application.Events.CreateEvent;
+﻿using Eventify.Modules.Events.Application.Events.Create;
+using Eventify.Shared.Presentation.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -6,9 +7,9 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Eventify.Modules.Events.Presentation.Events;
 
-internal static class CreateEvent
+internal sealed class CreateEvent : IEndpoint
 {
-    public static void MapEndpoint(IEndpointRouteBuilder app)
+    public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapPost("events", async (Request request, ISender sender) =>
         {
@@ -16,7 +17,7 @@ internal static class CreateEvent
             var command = new CreateEventCommand(categoryId, title, description, location, startsAtUtc, endsAtUtc);
             var result = await sender.Send(command);
 
-            return result.ToApiResponse(ApiResults.Ok, ApiResults.Problem);
+            return result.ToApiResponse(ApiResult.Ok, ApiResult.Problem);
         })
         .WithTags(Tags.Events);
     }

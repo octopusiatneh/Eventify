@@ -1,9 +1,9 @@
-﻿using Eventify.Modules.Users.Application.Abstractions.Data;
+﻿using Eventify.Modules.Users.Presentation.Abstractions.Data;
 using Eventify.Modules.Users.Domain.Users;
 using Eventify.Shared.Application.CQRS;
 using Eventify.Shared.Domain;
 
-namespace Eventify.Modules.Users.Application.Users.Create;
+namespace Eventify.Modules.Users.Presentation.Users.Create;
 
 public sealed class CreateUserHandler(IUserRepository userRepository, IUnitOfWork unitOfWork)
     : ICommandHandler<CreateUserCommand, Guid>
