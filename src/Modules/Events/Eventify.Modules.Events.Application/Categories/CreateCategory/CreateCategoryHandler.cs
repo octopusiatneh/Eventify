@@ -5,7 +5,7 @@ using Eventify.Shared.Domain;
 
 namespace Eventify.Modules.Events.Application.Categories.CreateCategory;
 
-public sealed class CreateCategoryHandler : ICommandHandler<CreateCategoryCommand, Guid>
+internal sealed class CreateCategoryHandler : ICommandHandler<CreateCategoryCommand, Guid>
 {
     private readonly ICategoryRepository _categoryRepository;
     private readonly IUnitOfWork _unitOfWork;

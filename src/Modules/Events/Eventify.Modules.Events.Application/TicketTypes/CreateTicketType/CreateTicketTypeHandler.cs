@@ -22,7 +22,6 @@ public class CreateTicketTypeHandler(IUnitOfWork unitOfWork, IEventRepository ev
         await ticketTypeRepository.InsertAsync(ticketType, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
         
-        ticketType.Raise(new TicketTypeCreated(ticketType.Id));
 
         return ticketType.Id;
     }

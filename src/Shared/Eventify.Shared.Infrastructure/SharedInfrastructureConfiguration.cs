@@ -4,6 +4,7 @@ using Eventify.Shared.Application.Database;
 using Eventify.Shared.Infrastructure.Caching;
 using Eventify.Shared.Infrastructure.Clock;
 using Eventify.Shared.Infrastructure.Data;
+using Eventify.Shared.Infrastructure.Interceptors;
 using Eventify.Shared.Infrastructure.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,7 @@ public static class SharedInfrastructureConfiguration
             opts => configuration.GetSection(DbConnectionStringOptions.DbConnectionString)
         );
         services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
+        services.TryAddSingleton<PublishDomainEventInterceptor>();
         services.TryAddSingleton<IDateTimeProvider, DateTimeProvider>();
 
         RegisterPostgres(configuration, services);
@@ -40,11 +42,18 @@ public static class SharedInfrastructureConfiguration
 
     private static void RegisterCaching(IConfiguration configuration, IServiceCollection services)
     {
-        var redisConnectionString = configuration.GetConnectionString("Redis")!;
-        var connectionMultiplexer = ConnectionMultiplexer.Connect(redisConnectionString);
-        services.TryAddSingleton(connectionMultiplexer);
-        services.AddStackExchangeRedisCache(options
-            => options.ConnectionMultiplexerFactory = () => Task.FromResult<IConnectionMultiplexer>(connectionMultiplexer));
+        try
+        {
+            var redisConnectionString = configuration.GetConnectionString("Redis")!;
+            var connectionMultiplexer = ConnectionMultiplexer.Connect(redisConnectionString);
+            services.TryAddSingleton(connectionMultiplexer);
+            services.AddStackExchangeRedisCache(options
+                => options.ConnectionMultiplexerFactory = () => Task.FromResult<IConnectionMultiplexer>(connectionMultiplexer));
+        }
+        catch
+        {
+            services.AddDistributedMemoryCache();
+        }
 
         services.TryAddSingleton<ICacheService, CacheService>();
     }

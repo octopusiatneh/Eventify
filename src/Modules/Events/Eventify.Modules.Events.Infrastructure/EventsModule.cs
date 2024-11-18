@@ -8,6 +8,7 @@ using Eventify.Modules.Events.Infrastructure.Events;
 using Eventify.Modules.Events.Infrastructure.TicketTypes;
 using Eventify.Modules.Events.Presentation.Categories;
 using Eventify.Modules.Events.Presentation.Events;
+using Eventify.Shared.Infrastructure.Interceptors;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -37,13 +38,14 @@ public static class EventsModule
     {
         var databaseConnectionString = configuration.GetConnectionString("Database")!;
 
-        services.AddDbContext<EventsDbContext>(options =>
-            options
-                .UseNpgsql(
-                    databaseConnectionString,
-                    npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Events)
-                )
-                .UseSnakeCaseNamingConvention());
+        services.AddDbContext<EventsDbContext>((sp, options) => options
+            .UseNpgsql(
+                databaseConnectionString,
+                npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Events)
+            )
+            .UseSnakeCaseNamingConvention()
+            .AddInterceptors(sp.GetRequiredService<PublishDomainEventInterceptor>())
+        );
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<EventsDbContext>());
         services.AddScoped<IEventRepository, EventRepository>();

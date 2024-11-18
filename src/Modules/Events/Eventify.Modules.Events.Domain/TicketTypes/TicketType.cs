@@ -32,7 +32,12 @@ public sealed class TicketType : Entity
     public int Quantity { get; private set; }
 
     public static TicketType Create(Event @event, string name, string currency, decimal price, int quantity)
-        => new(Guid.NewGuid(), @event.Id, name, currency, price, quantity);
+    {
+        var ticketType = new TicketType(Guid.NewGuid(), @event.Id, name, currency, price, quantity);
+        ticketType.Raise(new TicketTypeCreated(ticketType.Id));
+
+        return ticketType;
+    }
 
     public void UpdatePrice(decimal price)
     {

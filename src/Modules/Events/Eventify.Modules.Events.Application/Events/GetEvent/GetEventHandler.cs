@@ -6,7 +6,7 @@ using Eventify.Shared.Domain;
 
 namespace Eventify.Modules.Events.Application.Events.GetEvent;
 
-public sealed class GetEventHandler : IQueryHandler<GetEventQuery, EventResponse>
+internal sealed class GetEventHandler : IQueryHandler<GetEventQuery, EventResponse>
 {
     private readonly IDbConnectionFactory _dbConnectionFactory;
 

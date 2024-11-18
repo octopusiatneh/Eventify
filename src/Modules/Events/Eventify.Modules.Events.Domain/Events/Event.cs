@@ -26,11 +26,11 @@ public sealed class Event : Entity
     public EventStatus Status { get; private set; }
 
     public static Event Create(Category category,
-                                       string title,
-                                       string description,
-                                       string location,
-                                       DateTime startsAtUtc,
-                                       DateTime? endsAtUtc)
+                               string title,
+                               string description,
+                               string location,
+                               DateTime startsAtUtc,
+                               DateTime? endsAtUtc)
     {
         var @event = new Event
         {
@@ -43,6 +43,8 @@ public sealed class Event : Entity
             EndsAtUtc = endsAtUtc,
             Status = EventStatus.Draft
         };
+        
+        @event.Raise(new EventCreated(@event.Id));
 
         return @event;
     }

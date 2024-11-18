@@ -25,8 +25,6 @@ internal sealed class CreateEventHandler(
         await eventRepository.InsertAsync(@event, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        @event.Raise(new EventCreated(@event.Id));
-
         return @event.Id;
     }
 }

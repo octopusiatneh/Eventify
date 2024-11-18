@@ -8,7 +8,6 @@
   <ItemGroup>
     <Folder Include="Events\GetEvents\" />
     <Folder Include="Events\SearchEvents\" />
-    <Folder Include="Events\RescheduleEvent\" />
   </ItemGroup>
 
 </Project>
