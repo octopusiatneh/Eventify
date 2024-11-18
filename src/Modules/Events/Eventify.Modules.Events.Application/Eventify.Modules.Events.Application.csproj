@@ -6,8 +6,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Events\GetEvents\" />
-    <Folder Include="Events\SearchEvents\" />
+    <Folder Include="Events\GetMany\" />
   </ItemGroup>
 
 </Project>

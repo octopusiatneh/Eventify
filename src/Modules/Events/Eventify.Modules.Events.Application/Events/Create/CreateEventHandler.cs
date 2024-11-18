@@ -4,7 +4,7 @@ using Eventify.Modules.Events.Domain.Events;
 using Eventify.Shared.Application.CQRS;
 using Eventify.Shared.Domain;
 
-namespace Eventify.Modules.Events.Application.Events.CreateEvent;
+namespace Eventify.Modules.Events.Application.Events.Create;
 
 internal sealed class CreateEventHandler(
     IEventRepository eventRepository,

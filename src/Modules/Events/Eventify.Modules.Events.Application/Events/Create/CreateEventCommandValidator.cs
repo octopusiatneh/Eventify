@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Eventify.Modules.Events.Application.Events.CreateEvent;
+namespace Eventify.Modules.Events.Application.Events.Create;
 
 internal sealed class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
 {

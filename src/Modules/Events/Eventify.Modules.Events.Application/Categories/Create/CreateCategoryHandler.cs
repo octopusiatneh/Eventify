@@ -3,7 +3,7 @@ using Eventify.Modules.Events.Domain.Categories;
 using Eventify.Shared.Application.CQRS;
 using Eventify.Shared.Domain;
 
-namespace Eventify.Modules.Events.Application.Categories.CreateCategory;
+namespace Eventify.Modules.Events.Application.Categories.Create;
 
 internal sealed class CreateCategoryHandler : ICommandHandler<CreateCategoryCommand, Guid>
 {

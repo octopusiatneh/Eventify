@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Eventify.Modules.Events.Application.TicketTypes.CreateTicketType;
+namespace Eventify.Modules.Events.Application.TicketTypes.Create;
 
 internal sealed class CreateTicketTypeCommandValidator : AbstractValidator<CreateTicketTypeCommand>
 {
-    public  CreateTicketTypeCommandValidator()
+    public CreateTicketTypeCommandValidator()
     {
         RuleFor(c => c.EventId).NotEmpty();
         RuleFor(c => c.Name).NotEmpty().Length(min: 2, max: 5);

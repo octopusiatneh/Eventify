@@ -1,7 +1,7 @@
 ﻿using Eventify.Shared.Application.CQRS;
 using Eventify.Shared.Domain;
 
-namespace Eventify.Modules.Events.Application.Events.RescheduleEvent;
+namespace Eventify.Modules.Events.Application.Events.Reschedule;
 
 internal sealed class RescheduleEventHandler : ICommandHandler<RescheduleEventCommand, Guid>
 {

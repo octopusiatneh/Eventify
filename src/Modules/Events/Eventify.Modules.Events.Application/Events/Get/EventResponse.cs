@@ -1,4 +1,4 @@
-﻿namespace Eventify.Modules.Events.Application.Events.GetEvent;
+﻿namespace Eventify.Modules.Events.Application.Events.Get;
 
 public sealed record EventResponse(
     Guid Id,

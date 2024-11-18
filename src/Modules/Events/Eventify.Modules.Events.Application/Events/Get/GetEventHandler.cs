@@ -4,7 +4,7 @@ using Eventify.Shared.Application.CQRS;
 using Eventify.Shared.Application.Database;
 using Eventify.Shared.Domain;
 
-namespace Eventify.Modules.Events.Application.Events.GetEvent;
+namespace Eventify.Modules.Events.Application.Events.Get;
 
 internal sealed class GetEventHandler : IQueryHandler<GetEventQuery, EventResponse>
 {
@@ -31,7 +31,7 @@ internal sealed class GetEventHandler : IQueryHandler<GetEventQuery, EventRespon
              WHERE e.id = @EventId
              """;
 
-        EventResponse? @event = await dbConnection.QuerySingleOrDefaultAsync<EventResponse>(sql, request);
+        var @event = await dbConnection.QuerySingleOrDefaultAsync<EventResponse>(sql, request);
 
         if (@event is null)
         {

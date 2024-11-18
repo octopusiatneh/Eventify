@@ -44,7 +44,7 @@ public sealed class Event : Entity
             Status = EventStatus.Draft
         };
         
-        @event.Raise(new EventCreated(@event.Id));
+        @event.Raise(new EventCreatedEvent(@event.Id));
 
         return @event;
     }

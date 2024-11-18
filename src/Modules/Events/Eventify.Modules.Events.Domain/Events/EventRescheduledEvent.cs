@@ -2,7 +2,7 @@
 
 namespace Eventify.Modules.Events.Domain.Events;
 
-public sealed class EventRescheduled(Guid eventId) : DomainEvent
+public sealed class EventRescheduledEvent(Guid eventId) : DomainEvent
 {
     public Guid EventId { get; init; } = eventId;
 }

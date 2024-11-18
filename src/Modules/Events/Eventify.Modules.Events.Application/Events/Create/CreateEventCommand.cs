@@ -1,6 +1,6 @@
 ﻿using Eventify.Shared.Application.CQRS;
 
-namespace Eventify.Modules.Events.Application.Events.CreateEvent;
+namespace Eventify.Modules.Events.Application.Events.Create;
 
 public sealed record CreateEventCommand(
     Guid CategoryId,
