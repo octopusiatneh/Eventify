@@ -2,7 +2,7 @@
 
 namespace Eventify.Modules.Ticketing.Application.Cart.AddItem;
 
-internal class AddItemValidator : AbstractValidator<AddItemCommand>
+internal sealed class AddItemValidator : AbstractValidator<AddItemCommand>
 {
     public AddItemValidator()
     {

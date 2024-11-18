@@ -1,7 +1,8 @@
-﻿using Eventify.Modules.Users.Domain.Users;
+﻿using Eventify.Modules.Users.Application.Abstractions.Data;
+using Eventify.Modules.Users.Domain.Users;
 using Eventify.Modules.Users.Infrastructure.Database;
 using Eventify.Modules.Users.Infrastructure.Users;
-using Eventify.Modules.Users.Presentation.Abstractions.Data;
+using Eventify.Modules.Users.Presentation;
 using Eventify.Shared.Presentation.Endpoints;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -17,7 +18,7 @@ public static class UsersModule
         IConfiguration configuration)
     {
         services.AddInfrastructure(configuration);
-        services.AddEndpoints(Presentation.AssemblyReference.Assembly);
+        services.AddEndpoints(AssemblyReference.Assembly);
 
         return services;
     }
@@ -30,7 +31,8 @@ public static class UsersModule
             options
                 .UseNpgsql(
                     databaseConnectionString,
-                    npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Users)
+                    npgsqlOptions =>
+                        npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Users)
                 )
                 .UseSnakeCaseNamingConvention());
 

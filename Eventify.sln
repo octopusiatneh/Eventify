@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Ticketing.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Ticketing.Infrastructure", "src\Modules\Ticketing\Eventify.Modules.Ticketing.Infrastructure\Eventify.Modules.Ticketing.Infrastructure.csproj", "{576A4CBB-51CA-4D3E-A883-1FAE4A745FFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Users.Contracts", "src\Modules\Users\Eventify.Modules.Users.Contracts\Eventify.Modules.Users.Contracts.csproj", "{BD56BBDC-530A-4927-BE8F-29C95BC883F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +139,10 @@ Global
 		{576A4CBB-51CA-4D3E-A883-1FAE4A745FFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{576A4CBB-51CA-4D3E-A883-1FAE4A745FFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{576A4CBB-51CA-4D3E-A883-1FAE4A745FFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD56BBDC-530A-4927-BE8F-29C95BC883F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD56BBDC-530A-4927-BE8F-29C95BC883F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD56BBDC-530A-4927-BE8F-29C95BC883F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD56BBDC-530A-4927-BE8F-29C95BC883F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +171,7 @@ Global
 		{EC1D751B-95C7-4126-9E53-C38DFC5FB104} = {4E3D3E86-BEB1-4549-B895-E01C3656CC61}
 		{85DE77E9-7BD6-4C78-9CE7-6E027C89E9BA} = {4E3D3E86-BEB1-4549-B895-E01C3656CC61}
 		{576A4CBB-51CA-4D3E-A883-1FAE4A745FFD} = {4E3D3E86-BEB1-4549-B895-E01C3656CC61}
+		{BD56BBDC-530A-4927-BE8F-29C95BC883F9} = {07555C48-7B53-4ED0-ABF8-95BAEF73F843}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E42AE86-7F3C-45F4-A386-AB71CC4446CB}

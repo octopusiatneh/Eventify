@@ -14,30 +14,33 @@ public sealed class PublishDomainEventInterceptor : SaveChangesInterceptor
         _scopeFactory = scopeFactory;
     }
 
-    public override async ValueTask<int> SavedChangesAsync(SaveChangesCompletedEventData eventData, int result, CancellationToken cancellationToken = default)
+    public override async ValueTask<int> SavedChangesAsync(SaveChangesCompletedEventData eventData, int result,
+        CancellationToken cancellationToken = default)
     {
         var context = eventData.Context;
-        if (context is not null)
+        if (context is null)
         {
-            var domainEvents = context.ChangeTracker
-                .Entries<Entity>()
-                .Select(entry => entry.Entity)
-                .SelectMany(entity =>
-                {
-                    var domainEvents = entity.DomainEvents;
-                    entity.ClearDomainEvents();
+            return await base.SavedChangesAsync(eventData, result, cancellationToken);
+        }
 
-                    return domainEvents;
-                })
-                .ToArray();
-
-            using var scope = _scopeFactory.CreateScope();
-            var publisher = scope.ServiceProvider.GetRequiredService<IPublisher>();
-
-            foreach (var domainEvent in domainEvents)
+        var domainEvents = context.ChangeTracker
+            .Entries<Entity>()
+            .Select(entry => entry.Entity)
+            .SelectMany(entity =>
             {
-                await publisher.Publish(domainEvent, cancellationToken);
-            }
+                var domainEvents = entity.DomainEvents;
+                entity.ClearDomainEvents();
+
+                return domainEvents;
+            })
+            .ToArray();
+
+        using var scope = _scopeFactory.CreateScope();
+        var publisher = scope.ServiceProvider.GetRequiredService<IPublisher>();
+
+        foreach (var domainEvent in domainEvents)
+        {
+            await publisher.Publish(domainEvent, cancellationToken);
         }
 
         return await base.SavedChangesAsync(eventData, result, cancellationToken);

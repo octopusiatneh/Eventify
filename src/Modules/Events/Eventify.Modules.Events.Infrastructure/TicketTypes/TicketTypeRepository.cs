@@ -4,18 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Eventify.Modules.Events.Infrastructure.TicketTypes;
 
-internal sealed class TicketTypeRepository : ITicketTypeRepository
+internal sealed class TicketTypeRepository(EventsDbContext dbContext) : ITicketTypeRepository
 {
-    private readonly EventsDbContext _dbContext;
-
-    public TicketTypeRepository(EventsDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-
     public async Task<TicketType?> GetAsync(Guid id, CancellationToken cancellationToken = default)
-        => await _dbContext.TicketTypes.SingleOrDefaultAsync(c => c.Id == id, cancellationToken);
+        => await dbContext.TicketTypes.SingleOrDefaultAsync(c => c.Id == id, cancellationToken);
 
     public async Task InsertAsync(TicketType ticketType, CancellationToken cancellationToken = default)
-        => await _dbContext.TicketTypes.AddAsync(ticketType, cancellationToken);
+        => await dbContext.TicketTypes.AddAsync(ticketType, cancellationToken);
 }

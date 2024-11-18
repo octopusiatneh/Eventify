@@ -16,8 +16,7 @@ internal sealed class AddItem : IEndpoint
             var (eventId, ticketTypeId, quantity) = request;
             var command = new AddItemCommand(eventId, ticketTypeId, quantity);
             await sender.Send(command);
-
-        }).WithTags();
+        }).WithTags(Tags.Cart);
     }
 
     internal sealed record Request(
