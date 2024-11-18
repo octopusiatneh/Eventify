@@ -1,4 +1,4 @@
-﻿namespace Eventify.Modules.Ticketing.Application.Cart;
+﻿namespace Eventify.Modules.Ticketing.Domain.Cart;
 
 public sealed class Cart
 {
