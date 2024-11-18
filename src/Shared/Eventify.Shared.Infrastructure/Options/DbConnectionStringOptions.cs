@@ -4,5 +4,5 @@ public class DbConnectionStringOptions
 {
     public const string DbConnectionString = "ConnectionStrings";
 
-    public string Databse { get; init; } = string.Empty;
+    public string Database { get; init; } = string.Empty;
 }

@@ -5,11 +5,10 @@ using Serilog.Context;
 
 namespace Eventify.Shared.Application.Behaviors;
 
-internal sealed class RequestLogPipelineBehavior<TRequest, TResponse>(
-    ILogger<RequestLogPipelineBehavior<TRequest, TResponse>> logger)
-    : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : class
-    where TResponse : Result
+internal sealed class RequestLogPipelineBehavior<TRequest, TResponse>(ILogger<RequestLogPipelineBehavior<TRequest, TResponse>> logger)
+    : IPipelineBehavior<TRequest, TResponse> 
+        where TRequest : class
+        where TResponse : Result
 {
     public async Task<TResponse> Handle(
         TRequest request,
