@@ -59,7 +59,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Modules.Ticketing.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Modules.Ticketing.Infrastructure", "src\Modules\Ticketing\Eventify.Modules.Ticketing.Infrastructure\Eventify.Modules.Ticketing.Infrastructure.csproj", "{576A4CBB-51CA-4D3E-A883-1FAE4A745FFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Users.MessageContracts", "src\Modules\Users\Eventify.Modules.Users.Contracts\Eventify.Modules.Users.MessageContracts.csproj", "{BD56BBDC-530A-4927-BE8F-29C95BC883F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Users.MessageContracts", "src\Modules\Users\Eventify.Modules.Users.MessageContracts\Eventify.Modules.Users.MessageContracts.csproj", "{BD56BBDC-530A-4927-BE8F-29C95BC883F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

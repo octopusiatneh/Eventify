@@ -29,9 +29,9 @@ COPY ["src/Modules/Events/Eventify.Modules.Events.Presentation/Eventify.Modules.
 
 # Users module
 COPY ["src/Modules/Users/Eventify.Modules.Users.Application/Eventify.Modules.Users.Application.csproj", "src/Modules/Users/Eventify.Modules.Users.Application/"]
-COPY ["src/Modules/Users/Eventify.Modules.Users.Contracts/Eventify.Modules.Users.Contracts.csproj", "src/Modules/Users/Eventify.Modules.Users.Contracts/"]
 COPY ["src/Modules/Users/Eventify.Modules.Users.Domain/Eventify.Modules.Users.Domain.csproj", "src/Modules/Users/Eventify.Modules.Users.Domain/"]
 COPY ["src/Modules/Users/Eventify.Modules.Users.Infrastructure/Eventify.Modules.Users.Infrastructure.csproj", "src/Modules/Users/Eventify.Modules.Users.Infrastructure/"]
+COPY ["src/Modules/Users/Eventify.Modules.Users.MessageContracts/Eventify.Modules.Users.MessageContracts.csproj", "src/Modules/Users/Eventify.Modules.Users.MessageContracts/"]
 COPY ["src/Modules/Users/Eventify.Modules.Users.Presentation/Eventify.Modules.Users.Presentation.csproj", "src/Modules/Users/Eventify.Modules.Users.Presentation/"]
 
 RUN dotnet restore "./src/API/Eventify.Api/Eventify.Api.csproj"

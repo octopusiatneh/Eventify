@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Eventify.Shared.Application\Eventify.Shared.Application.csproj" />
-      <ProjectReference Include="..\Eventify.Modules.Users.Contracts\Eventify.Modules.Users.MessageContracts.csproj" />
+      <ProjectReference Include="..\Eventify.Modules.Users.MessageContracts\Eventify.Modules.Users.MessageContracts.csproj" />
     <ProjectReference Include="..\Eventify.Modules.Users.Domain\Eventify.Modules.Users.Domain.csproj" />
   </ItemGroup>
 
