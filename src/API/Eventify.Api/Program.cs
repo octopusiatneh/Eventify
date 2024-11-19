@@ -6,6 +6,8 @@ using Eventify.Modules.Users.Infrastructure;
 using Eventify.Shared.Application;
 using Eventify.Shared.Infrastructure;
 using Eventify.Shared.Presentation.Endpoints;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -26,6 +28,11 @@ builder.Services.AddSharedApplicationConfig([
 ]);
 builder.Services.AddSharedInfrastructureConfig(builder.Configuration, [TicketingModule.ConfigureConsumers]);
 
+// Add Healthcheck
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
+    .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
+
 // Add Modules
 builder.Services.AddEventsModule(builder.Configuration);
 builder.Services.AddUsersModule(builder.Configuration);
@@ -42,6 +49,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapEndpoints();
+app.MapHealthChecks("health", new HealthCheckOptions
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 app.UseSerilogRequestLogging();
 app.UseExceptionHandler();
 
