@@ -3,6 +3,7 @@ using Eventify.Modules.Users.Domain.Users;
 using Eventify.Modules.Users.Infrastructure.Database;
 using Eventify.Modules.Users.Infrastructure.Users;
 using Eventify.Modules.Users.Presentation;
+using Eventify.Shared.Infrastructure.Interceptors;
 using Eventify.Shared.Presentation.Endpoints;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -27,14 +28,16 @@ public static class UsersModule
     {
         var databaseConnectionString = configuration.GetConnectionString("Database")!;
 
-        services.AddDbContext<UsersDbContext>(options =>
+        services.AddDbContext<UsersDbContext>((sp, options) =>
             options
                 .UseNpgsql(
                     databaseConnectionString,
                     npgsqlOptions =>
                         npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Users)
                 )
-                .UseSnakeCaseNamingConvention());
+                .UseSnakeCaseNamingConvention()
+                .AddInterceptors(sp.GetRequiredService<PublishDomainEventInterceptor>())
+        );
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<UsersDbContext>());
         services.AddScoped<IUserRepository, UserRepository>();

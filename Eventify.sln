@@ -53,13 +53,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ticketing", "Ticketing", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Modules.Ticketing.Application", "src\Modules\Ticketing\Eventify.Modules.Ticketing.Application\Eventify.Modules.Ticketing.Application.csproj", "{CFD6A7A9-C824-4FBF-98C5-197D3CA3087F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Ticketing.Domain", "src\Modules\Ticketing\Eventify.Modules.Ticketing.Domain\Eventify.Modules.Ticketing.Domain.csproj", "{EC1D751B-95C7-4126-9E53-C38DFC5FB104}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Modules.Ticketing.Domain", "src\Modules\Ticketing\Eventify.Modules.Ticketing.Domain\Eventify.Modules.Ticketing.Domain.csproj", "{EC1D751B-95C7-4126-9E53-C38DFC5FB104}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Ticketing.Presentation", "src\Modules\Ticketing\Eventify.Modules.Ticketing.Presentation\Eventify.Modules.Ticketing.Presentation.csproj", "{85DE77E9-7BD6-4C78-9CE7-6E027C89E9BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Modules.Ticketing.Presentation", "src\Modules\Ticketing\Eventify.Modules.Ticketing.Presentation\Eventify.Modules.Ticketing.Presentation.csproj", "{85DE77E9-7BD6-4C78-9CE7-6E027C89E9BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Ticketing.Infrastructure", "src\Modules\Ticketing\Eventify.Modules.Ticketing.Infrastructure\Eventify.Modules.Ticketing.Infrastructure.csproj", "{576A4CBB-51CA-4D3E-A883-1FAE4A745FFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Modules.Ticketing.Infrastructure", "src\Modules\Ticketing\Eventify.Modules.Ticketing.Infrastructure\Eventify.Modules.Ticketing.Infrastructure.csproj", "{576A4CBB-51CA-4D3E-A883-1FAE4A745FFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Users.Contracts", "src\Modules\Users\Eventify.Modules.Users.Contracts\Eventify.Modules.Users.Contracts.csproj", "{BD56BBDC-530A-4927-BE8F-29C95BC883F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Users.MessageContracts", "src\Modules\Users\Eventify.Modules.Users.Contracts\Eventify.Modules.Users.MessageContracts.csproj", "{BD56BBDC-530A-4927-BE8F-29C95BC883F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

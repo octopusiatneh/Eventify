@@ -1,8 +1,9 @@
-﻿namespace Eventify.Shared.Application.EventBus;
+﻿namespace Eventify.Shared.Application.Bus;
 
 public interface IEventBus
 {
-    Task PublishAsync<T>(T message, CancellationToken cancellationToken = default) where T : IIntegrationMessage;
+    Task PublishAsync<T>(T message, CancellationToken cancellationToken = default)
+        where T : IIntegrationMessage;
 }
 
 public interface IIntegrationMessage
@@ -12,14 +13,4 @@ public interface IIntegrationMessage
     DateTime OccurredOnUtc { get; }
 }
 
-public abstract class IntegrationMessage : IIntegrationMessage
-{
-    protected IntegrationMessage(Guid id, DateTime occurredOnUtc)
-    {
-        Id = id;
-        OccurredOnUtc = occurredOnUtc;
-    }
-
-    public Guid Id { get; init; }
-    public DateTime OccurredOnUtc { get; init; }
-}
+public abstract record IntegrationMessage(Guid Id, DateTime OccurredOnUtc) : IIntegrationMessage;

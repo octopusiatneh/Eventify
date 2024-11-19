@@ -3,6 +3,7 @@ services:
     image: postgres:latest
     container_name: Eventify.Database
     environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
       - POSTGRES_DB=eventify
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

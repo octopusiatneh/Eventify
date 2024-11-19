@@ -1,4 +1,4 @@
-﻿using Eventify.Shared.Application.EventBus;
+﻿using Eventify.Shared.Application.Bus;
 using MassTransit;
 
 namespace Eventify.Shared.Infrastructure.Bus;

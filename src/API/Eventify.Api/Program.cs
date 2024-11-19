@@ -1,6 +1,5 @@
 using Eventify.Api.Extensions;
 using Eventify.Api.Middlewares;
-using Eventify.Modules.Events.Application;
 using Eventify.Modules.Events.Infrastructure;
 using Eventify.Modules.Ticketing.Infrastructure;
 using Eventify.Modules.Users.Infrastructure;
@@ -21,9 +20,9 @@ builder.Services.AddSwaggerGen(options => options.CustomSchemaIds(t => t.FullNam
 
 // Add Cross-Cutting concerns
 builder.Services.AddSharedApplicationConfig([
-    AssemblyReference.Assembly,
-    Eventify.Modules.Users.Presentation.AssemblyReference.Assembly,
-    Eventify.Modules.Ticketing.Presentation.AssemblyReference.Assembly,
+    Eventify.Modules.Events.Application.AssemblyReference.Assembly,
+    Eventify.Modules.Users.Application.AssemblyReference.Assembly,
+    Eventify.Modules.Ticketing.Application.AssemblyReference.Assembly,
 ]);
 builder.Services.AddSharedInfrastructureConfig(builder.Configuration, [TicketingModule.ConfigureConsumers]);
 

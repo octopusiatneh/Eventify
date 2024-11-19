@@ -1,7 +1,7 @@
-﻿using Eventify.Shared.Application.Caching;
+﻿using Eventify.Shared.Application.Bus;
+using Eventify.Shared.Application.Caching;
 using Eventify.Shared.Application.Clock;
 using Eventify.Shared.Application.Database;
-using Eventify.Shared.Application.EventBus;
 using Eventify.Shared.Infrastructure.Bus;
 using Eventify.Shared.Infrastructure.Caching;
 using Eventify.Shared.Infrastructure.Clock;
@@ -35,7 +35,7 @@ public static class SharedInfrastructureConfiguration
         {
             Array.ForEach(moduleConfigureConsumers, configureConsumer => configureConsumer(configure));
             configure.SetKebabCaseEndpointNameFormatter();
-            configure.UsingInMemory();
+            configure.UsingInMemory((context, cfg) => cfg.ConfigureEndpoints(context));
         });
 
         RegisterPostgres(configuration, services);

@@ -28,7 +28,7 @@ public sealed class PublishDomainEventInterceptor : SaveChangesInterceptor
             .Select(entry => entry.Entity)
             .SelectMany(entity =>
             {
-                var domainEvents = entity.DomainEvents;
+                IReadOnlyCollection<IDomainEvent> domainEvents = entity.DomainEvents;
                 entity.ClearDomainEvents();
 
                 return domainEvents;

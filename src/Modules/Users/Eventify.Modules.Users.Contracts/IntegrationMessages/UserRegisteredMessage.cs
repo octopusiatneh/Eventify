@@ -1,17 +1,11 @@
-﻿using Eventify.Shared.Application.EventBus;
+﻿using Eventify.Shared.Application.Bus;
 
-namespace Eventify.Modules.Users.Contracts.IntegrationMessages;
+namespace Eventify.Modules.Users.MessageContracts.IntegrationMessages;
 
-public sealed class UserRegisteredMessage(
-    Guid notificationId,
-    DateTime occurredOnUtc,
-    Guid userId,
-    string email,
-    string firstName,
-    string lastName) : IntegrationMessage(notificationId, occurredOnUtc)
-{
-    public Guid UserId { get; private set; } = userId;
-    public string Email { get; private set; } = email;
-    public string FirstName { get; private set; } = firstName;
-    public string LastName { get; private set; } = lastName;
-}
+public sealed record UserRegisteredMessage(
+    Guid Id,
+    DateTime OccurredOnUtc,
+    Guid UserId,
+    string Email,
+    string FirstName,
+    string LastName) : IntegrationMessage(Id, OccurredOnUtc);
