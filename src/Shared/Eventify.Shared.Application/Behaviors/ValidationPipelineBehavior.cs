@@ -27,8 +27,7 @@ internal sealed class ValidationPipelineBehavior<TRequest, TResponse>(IEnumerabl
 
     private static TResponse ToValidationFailureResult(ValidationFailure[] validationFailures)
     {
-        if (typeof(TResponse).IsGenericType &&
-                    typeof(TResponse).GetGenericTypeDefinition() == typeof(Result<>))
+        if (typeof(TResponse).IsGenericType && typeof(TResponse).GetGenericTypeDefinition() == typeof(Result<>))
         {
             Type resultType = typeof(TResponse).GetGenericArguments()[0];
 

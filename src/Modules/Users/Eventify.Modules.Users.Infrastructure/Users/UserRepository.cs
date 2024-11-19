@@ -9,6 +9,6 @@ internal sealed class UserRepository(UsersDbContext dbContext) : IUserRepository
     public async Task<User?> GetAsync(Guid id, CancellationToken cancellationToken = default)
         => await dbContext.Users.SingleOrDefaultAsync(c => c.Id == id, cancellationToken);
 
-    public async Task InsertAsync(User category, CancellationToken cancellationToken = default)
-        => await dbContext.Users.AddAsync(category, cancellationToken);
+    public async Task InsertAsync(User user, CancellationToken cancellationToken = default)
+        => await dbContext.Users.AddAsync(user, cancellationToken);
 }

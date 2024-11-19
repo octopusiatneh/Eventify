@@ -1,4 +1,5 @@
-﻿using Eventify.Modules.Events.Application.TicketTypes.CreateTicketType;
+﻿using Eventify.Modules.Events.Application.TicketTypes.Create;
+using Eventify.Shared.Presentation.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -6,9 +7,9 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Eventify.Modules.Events.Presentation.TicketTypes;
 
-internal static class CreateTicketType
+internal sealed class CreateTicketType : IEndpoint
 {
-    public static void MapEndpoint(IEndpointRouteBuilder app)
+    public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapPost("ticket-types", async (Request request, ISender sender) =>
         {
@@ -19,7 +20,7 @@ internal static class CreateTicketType
                 request.Currency,
                 request.Quantity));
 
-            return result.ToApiResponse(ApiResults.Ok, ApiResults.Problem);
+            return result.ToApiResponse(ApiResult.Ok, ApiResult.Problem);
         })
         .WithTags(Tags.TicketTypes);
     }

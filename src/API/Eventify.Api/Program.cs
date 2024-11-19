@@ -1,9 +1,11 @@
 using Eventify.Api.Extensions;
 using Eventify.Api.Middlewares;
 using Eventify.Modules.Events.Infrastructure;
+using Eventify.Modules.Ticketing.Infrastructure;
 using Eventify.Modules.Users.Infrastructure;
 using Eventify.Shared.Application;
 using Eventify.Shared.Infrastructure;
+using Eventify.Shared.Presentation.Endpoints;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
@@ -22,8 +24,9 @@ builder.Services.AddSwaggerGen(options => options.CustomSchemaIds(t => t.FullNam
 builder.Services.AddSharedApplicationConfig([
     Eventify.Modules.Events.Application.AssemblyReference.Assembly,
     Eventify.Modules.Users.Application.AssemblyReference.Assembly,
+    Eventify.Modules.Ticketing.Application.AssemblyReference.Assembly,
 ]);
-builder.Services.AddSharedInfrastructureConfig(builder.Configuration);
+builder.Services.AddSharedInfrastructureConfig(builder.Configuration, [TicketingModule.ConfigureConsumers]);
 
 // Add Healthcheck
 builder.Services.AddHealthChecks()
@@ -33,6 +36,7 @@ builder.Services.AddHealthChecks()
 // Add Modules
 builder.Services.AddEventsModule(builder.Configuration);
 builder.Services.AddUsersModule(builder.Configuration);
+builder.Services.AddTicketingModule(builder.Configuration);
 
 WebApplication app = builder.Build();
 
@@ -44,9 +48,7 @@ if (app.Environment.IsDevelopment())
     app.ApplyMigrations();
 }
 
-EventsModule.MapEndpoints(app);
-UsersModule.MapEndpoints(app);
-
+app.MapEndpoints();
 app.MapHealthChecks("health", new HealthCheckOptions
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse

@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Eventify.Modules.Users.Infrastructure.Database;
 
-public sealed class UsersDbContext(DbContextOptions<UsersDbContext> options) : DbContext(options), IUnitOfWork
+public sealed class UsersDbContext(DbContextOptions<UsersDbContext> options)
+    : DbContext(options), IUnitOfWork
 {
     internal DbSet<User> Users { get; set; }
 

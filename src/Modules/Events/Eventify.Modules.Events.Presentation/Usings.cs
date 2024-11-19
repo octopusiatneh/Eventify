@@ -1,1 +1,1 @@
-﻿global using Eventify.Shared.Presentation.WebApi;
+﻿global using Eventify.Shared.Presentation.ApiResult;
