@@ -10,7 +10,7 @@ public static class CacheOptions
     };
 
     public static DistributedCacheEntryOptions Create(TimeSpan? expiration)
-        => expiration is null 
+        => expiration is null
             ? DefaultOptions
             : new DistributedCacheEntryOptions { AbsoluteExpirationRelativeToNow = expiration };
 }

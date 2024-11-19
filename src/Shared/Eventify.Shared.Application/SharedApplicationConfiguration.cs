@@ -17,7 +17,7 @@ public static class SharedApplicationConfiguration
         void ConfigureMediatr(MediatRServiceConfiguration config)
         {
             config.RegisterServicesFromAssemblies(moduleAssemblies);
-            
+
             config.AddOpenBehavior(typeof(ExceptionHandlingPipelineBehavior<,>));
             config.AddOpenBehavior(typeof(RequestLogPipelineBehavior<,>));
             config.AddOpenBehavior(typeof(ValidationPipelineBehavior<,>));

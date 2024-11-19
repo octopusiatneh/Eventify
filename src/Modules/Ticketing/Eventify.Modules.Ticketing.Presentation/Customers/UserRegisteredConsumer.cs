@@ -10,7 +10,8 @@ public sealed class UserRegisteredConsumer(ISender sender) : IConsumer<UserRegis
     public async Task Consume(ConsumeContext<UserRegisteredMessage> context)
     {
         var message = context.Message;
-        await sender.Send(new CreateCustomerCommand(message.UserId, message.Email, message.FirstName,
-            message.LastName));
+        await sender.Send(
+            new CreateCustomerCommand(message.UserId, message.Email, message.FirstName, message.LastName)
+        );
     }
 }

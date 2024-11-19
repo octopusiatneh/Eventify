@@ -43,7 +43,7 @@ public sealed class Event : Entity
             EndsAtUtc = endsAtUtc,
             Status = EventStatus.Draft
         };
-        
+
         @event.Raise(new EventCreatedEvent(@event.Id));
 
         return @event;
