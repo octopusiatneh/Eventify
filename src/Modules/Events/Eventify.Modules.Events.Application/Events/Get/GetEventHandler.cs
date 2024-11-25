@@ -6,18 +6,12 @@ using Eventify.Shared.Domain;
 
 namespace Eventify.Modules.Events.Application.Events.Get;
 
-internal sealed class GetEventHandler : IQueryHandler<GetEventQuery, EventResponse>
+internal sealed class GetEventHandler(IDbConnectionFactory dbConnectionFactory)
+    : IQueryHandler<GetEventQuery, EventResponse>
 {
-    private readonly IDbConnectionFactory _dbConnectionFactory;
-
-    public GetEventHandler(IDbConnectionFactory dbConnectionFactory)
-    {
-        _dbConnectionFactory = dbConnectionFactory;
-    }
-
     public async Task<Result<EventResponse>> Handle(GetEventQuery request, CancellationToken cancellationToken)
     {
-        await using var dbConnection = await _dbConnectionFactory.OpenConnectionAsync();
+        await using var dbConnection = await dbConnectionFactory.OpenConnectionAsync();
         const string sql =
             $"""
              SELECT

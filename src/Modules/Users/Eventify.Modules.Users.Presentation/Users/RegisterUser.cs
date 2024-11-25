@@ -13,8 +13,10 @@ internal sealed class RegisterUser : IEndpoint
     {
         app.MapPost("users", async (Request request, ISender sender) =>
             {
-                var result =
-                    await sender.Send(new RegisterUserCommand(request.Email, request.FirstName, request.LastName));
+                var result = await sender.Send(
+                    new RegisterUserCommand(request.Email,
+                    request.FirstName,
+                    request.LastName));
 
                 return result.ToApiResponse(ApiResult.Ok, ApiResult.Problem);
             })

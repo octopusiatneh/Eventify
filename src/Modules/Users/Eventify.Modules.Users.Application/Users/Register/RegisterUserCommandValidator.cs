@@ -7,7 +7,7 @@ internal sealed class RegisterUserCommandValidator : AbstractValidator<RegisterU
     public RegisterUserCommandValidator()
     {
         RuleFor(c => c.Email).NotEmpty().EmailAddress();
-        RuleFor(c => c.FirstName).NotEmpty();
-        RuleFor(c => c.Lastname).NotEmpty();
+        RuleFor(c => c.FirstName).NotEmpty().MinimumLength(3);
+        RuleFor(c => c.LastName).NotEmpty().MinimumLength(3);
     }
 }

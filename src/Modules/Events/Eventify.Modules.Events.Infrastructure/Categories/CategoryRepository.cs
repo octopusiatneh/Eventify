@@ -4,18 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Eventify.Modules.Events.Infrastructure.Categories;
 
-internal sealed class CategoryRepository : ICategoryRepository
+internal sealed class CategoryRepository(EventsDbContext dbContext) : ICategoryRepository
 {
-    private readonly EventsDbContext _dbContext;
-
-    public CategoryRepository(EventsDbContext dbContext)
-    {
-        _dbContext = dbContext;
-    }
-
     public async Task<Category?> GetAsync(Guid id, CancellationToken cancellationToken = default)
-        => await _dbContext.Categories.SingleOrDefaultAsync(c => c.Id == id, cancellationToken);
+        => await dbContext.Categories.SingleOrDefaultAsync(c => c.Id == id, cancellationToken);
 
     public async Task InsertAsync(Category category, CancellationToken cancellationToken = default)
-        => await _dbContext.Categories.AddAsync(category, cancellationToken);
+        => await dbContext.Categories.AddAsync(category, cancellationToken);
 }

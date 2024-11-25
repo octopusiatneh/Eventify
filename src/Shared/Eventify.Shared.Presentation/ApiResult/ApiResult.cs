@@ -5,7 +5,8 @@ namespace Eventify.Shared.Presentation.ApiResult;
 
 public sealed class ApiResult
 {
-    public static IResult Ok<TValue>(TValue? value = default) => value is null ? Results.Ok() : Results.Ok(value);
+    public static IResult Ok<TValue>(TValue? value = default)
+        => value is null ? Results.Ok() : Results.Ok(value);
 
     public static IResult Problem(Result result)
     {
@@ -19,7 +20,7 @@ public sealed class ApiResult
             detail: GetDetail(result.Error),
             type: GetType(result.Error.Type),
             statusCode: GetStatusCode(result.Error.Type),
-            extensions: GetErrors()
+            extensions: GetErrors(result.Error)
         );
 
         static string GetTitle(Error error) =>
@@ -66,6 +67,24 @@ public sealed class ApiResult
                 _ => StatusCodes.Status500InternalServerError
             };
 
-        static Dictionary<string, object?>? GetErrors() => null;
+        static Dictionary<string, object?>? GetErrors(Error error)
+        {
+            if (error is not ValidationErrors validationErrors)
+            {
+                return null;
+            }
+
+            var dictionary = new Dictionary<string, object?>
+            {
+                {
+                    "extensions",
+                    validationErrors.Errors
+                        .GroupBy(e => e.Code, e => e.Message)
+                        .ToDictionary(e => e.Key, e => e.ToArray())
+                }
+            };
+
+            return dictionary;
+        }
     }
 }

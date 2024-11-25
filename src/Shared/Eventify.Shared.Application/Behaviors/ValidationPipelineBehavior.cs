@@ -37,12 +37,12 @@ internal sealed class ValidationPipelineBehavior<TRequest, TResponse>(IEnumerabl
 
             if (failureMethod is not null)
             {
-                return (TResponse)failureMethod.Invoke(null, [CreateValidationError(validationFailures)]);
+                return (TResponse)failureMethod.Invoke(null, [CreateValidationErrors(validationFailures)]);
             }
         }
         else if (typeof(TResponse) == typeof(Result))
         {
-            return (TResponse)(object)Result.Failure(CreateValidationError(validationFailures));
+            return (TResponse)(object)Result.Failure(CreateValidationErrors(validationFailures));
         }
 
         throw new ValidationException(validationFailures);
@@ -68,6 +68,6 @@ internal sealed class ValidationPipelineBehavior<TRequest, TResponse>(IEnumerabl
         return validationFailures;
     }
 
-    private static ValidationErrors CreateValidationError(ValidationFailure[] validationFailures) =>
-        new(validationFailures.Select(f => Error.Problem(f.ErrorCode, f.ErrorMessage)).ToArray());
+    private static ValidationErrors CreateValidationErrors(ValidationFailure[] validationFailures) =>
+        new(validationFailures.Select(f => Error.Problem(f.PropertyName, f.ErrorMessage)).ToArray());
 }

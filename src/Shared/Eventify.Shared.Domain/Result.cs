@@ -2,19 +2,13 @@
 
 namespace Eventify.Shared.Domain;
 
-public class Result
+public class Result(bool isSuccess, Error error)
 {
-    public Result(bool isSuccess, Error error)
-    {
-        IsSuccess = isSuccess;
-        Error = error;
-    }
-
-    public bool IsSuccess { get; private set; }
+    public bool IsSuccess { get; private set; } = isSuccess;
 
     public bool IsFailure => !IsSuccess;
 
-    public Error Error { get; private set; }
+    public Error Error { get; private set; } = error;
 
     public static Result Success() => new(true, Error.None);
 
@@ -25,18 +19,12 @@ public class Result
     public static Result<TValue> Failure<TValue>(Error error) => new(default, false, error);
 }
 
-public class Result<TValue> : Result
+public class Result<TValue>(TValue? value, bool isSuccess, Error error)
+    : Result(isSuccess, error)
 {
-    public Result(TValue? value, bool isSuccess, Error error) : base(isSuccess, error)
-    {
-        _value = value;
-    }
-
-    private readonly TValue? _value;
-
     [NotNull]
     public TValue Value => IsSuccess
-        ? _value!
+        ? value!
         : throw new InvalidOperationException("The value of a failure result can't be accessed");
 
     public static implicit operator Result<TValue>(TValue? value) =>

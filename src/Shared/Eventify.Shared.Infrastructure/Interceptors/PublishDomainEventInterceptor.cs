@@ -5,15 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Eventify.Shared.Infrastructure.Interceptors;
 
-public sealed class PublishDomainEventInterceptor : SaveChangesInterceptor
+public sealed class PublishDomainEventInterceptor(IServiceScopeFactory scopeFactory) : SaveChangesInterceptor
 {
-    private readonly IServiceScopeFactory _scopeFactory;
-
-    public PublishDomainEventInterceptor(IServiceScopeFactory scopeFactory)
-    {
-        _scopeFactory = scopeFactory;
-    }
-
     public override async ValueTask<int> SavedChangesAsync(SaveChangesCompletedEventData eventData, int result,
         CancellationToken cancellationToken = default)
     {
@@ -35,7 +28,7 @@ public sealed class PublishDomainEventInterceptor : SaveChangesInterceptor
             })
             .ToArray();
 
-        using var scope = _scopeFactory.CreateScope();
+        using var scope = scopeFactory.CreateScope();
         var publisher = scope.ServiceProvider.GetRequiredService<IPublisher>();
 
         foreach (var domainEvent in domainEvents)

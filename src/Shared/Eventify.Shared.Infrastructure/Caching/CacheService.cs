@@ -5,30 +5,23 @@ using Microsoft.Extensions.Caching.Distributed;
 
 namespace Eventify.Shared.Infrastructure.Caching;
 
-public sealed class CacheService : ICacheService
+public sealed class CacheService(IDistributedCache cache) : ICacheService
 {
-    private readonly IDistributedCache _cache;
-
-    public CacheService(IDistributedCache cache)
-    {
-        _cache = cache;
-    }
-
     public async Task<T?> GetAsync<T>(string cacheKey, CancellationToken cancellationToken = default)
     {
-        var bytes = await _cache.GetAsync(cacheKey, cancellationToken);
+        var bytes = await cache.GetAsync(cacheKey, cancellationToken);
 
         return bytes is null ? default : Deserialize<T>(bytes);
     }
 
     public Task RemoveAsync(string cacheKey, CancellationToken cancellationToken = default)
-        => _cache.RemoveAsync(cacheKey, cancellationToken);
+        => cache.RemoveAsync(cacheKey, cancellationToken);
 
     public Task SetAsync<T>(string cacheKey, T value, TimeSpan? expiration = null, CancellationToken cancellationToken = default)
     {
         var bytes = Serialize(value);
 
-        return _cache.SetAsync(cacheKey, bytes, options: CacheOptions.Create(expiration), cancellationToken);
+        return cache.SetAsync(cacheKey, bytes, options: CacheOptions.Create(expiration), cancellationToken);
     }
 
     private static T? Deserialize<T>(byte[] bytes) => JsonSerializer.Deserialize<T>(bytes!);

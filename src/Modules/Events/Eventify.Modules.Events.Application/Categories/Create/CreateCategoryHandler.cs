@@ -5,22 +5,14 @@ using Eventify.Shared.Domain;
 
 namespace Eventify.Modules.Events.Application.Categories.Create;
 
-internal sealed class CreateCategoryHandler : ICommandHandler<CreateCategoryCommand, Guid>
+internal sealed class CreateCategoryHandler(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
+    : ICommandHandler<CreateCategoryCommand, Guid>
 {
-    private readonly ICategoryRepository _categoryRepository;
-    private readonly IUnitOfWork _unitOfWork;
-
-    public CreateCategoryHandler(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
-    {
-        _categoryRepository = categoryRepository;
-        _unitOfWork = unitOfWork;
-    }
-
     public async Task<Result<Guid>> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
         var category = Category.Create(request.Name);
-        await _categoryRepository.InsertAsync(category, cancellationToken);
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        await categoryRepository.InsertAsync(category, cancellationToken);
+        await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return category.Id;
     }
