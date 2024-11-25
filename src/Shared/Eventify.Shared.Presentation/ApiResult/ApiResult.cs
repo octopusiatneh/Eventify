@@ -69,7 +69,7 @@ public sealed class ApiResult
 
         static Dictionary<string, object?>? GetErrors(Error error)
         {
-            if (error is not ValidationErrors validationErrors)
+            if (error is not ValidationError validationErrors)
             {
                 return null;
             }

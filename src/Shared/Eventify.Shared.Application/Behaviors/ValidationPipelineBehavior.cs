@@ -22,10 +22,10 @@ internal sealed class ValidationPipelineBehavior<TRequest, TResponse>(IEnumerabl
             return await next();
         }
 
-        return ToValidationFailureResult(validationFailures);
+        return ToValidationErrors(validationFailures);
     }
 
-    private static TResponse ToValidationFailureResult(ValidationFailure[] validationFailures)
+    private static TResponse ToValidationErrors(ValidationFailure[] validationFailures)
     {
         if (typeof(TResponse).IsGenericType && typeof(TResponse).GetGenericTypeDefinition() == typeof(Result<>))
         {
@@ -37,12 +37,12 @@ internal sealed class ValidationPipelineBehavior<TRequest, TResponse>(IEnumerabl
 
             if (failureMethod is not null)
             {
-                return (TResponse)failureMethod.Invoke(null, [CreateValidationErrors(validationFailures)]);
+                return (TResponse)failureMethod.Invoke(null, [ToValidationError(validationFailures)]);
             }
         }
         else if (typeof(TResponse) == typeof(Result))
         {
-            return (TResponse)(object)Result.Failure(CreateValidationErrors(validationFailures));
+            return (TResponse)(object)Result.Failure(ToValidationError(validationFailures));
         }
 
         throw new ValidationException(validationFailures);
@@ -60,14 +60,14 @@ internal sealed class ValidationPipelineBehavior<TRequest, TResponse>(IEnumerabl
         ValidationResult[] validationResults = await Task.WhenAll(
             validators.Select(validator => validator.ValidateAsync(context)));
 
-        ValidationFailure[] validationFailures = validationResults
+        ValidationFailure[] validationErrors = validationResults
             .Where(validationResult => !validationResult.IsValid)
             .SelectMany(validationResult => validationResult.Errors)
             .ToArray();
 
-        return validationFailures;
+        return validationErrors;
     }
 
-    private static ValidationErrors CreateValidationErrors(ValidationFailure[] validationFailures) =>
+    private static ValidationError ToValidationError(ValidationFailure[] validationFailures) =>
         new(validationFailures.Select(f => Error.Problem(f.PropertyName, f.ErrorMessage)).ToArray());
 }
