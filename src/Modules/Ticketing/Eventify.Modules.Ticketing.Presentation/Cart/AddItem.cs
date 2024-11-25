@@ -13,14 +13,14 @@ internal sealed class AddItem : IEndpoint
     {
         app.MapPost("cart", async (Request request, ISender sender) =>
         {
-            var (eventId, ticketTypeId, quantity) = request;
-            var command = new AddItemCommand(eventId, ticketTypeId, quantity);
+            var (customerId, ticketTypeId, quantity) = request;
+            var command = new AddItemCommand(customerId, ticketTypeId, quantity);
             await sender.Send(command);
         }).WithTags(Tags.Cart);
     }
 
     internal sealed record Request(
-        Guid EventId,
+        Guid CustomerId,
         Guid TicketTypeId,
         int Quantity
     );

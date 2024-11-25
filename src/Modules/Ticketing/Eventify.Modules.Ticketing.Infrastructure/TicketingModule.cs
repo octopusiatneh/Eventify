@@ -1,4 +1,5 @@
 ﻿using Eventify.Modules.Ticketing.Application.Abstractions.Data;
+using Eventify.Modules.Ticketing.Application.Cart;
 using Eventify.Modules.Ticketing.Domain.Customers;
 using Eventify.Modules.Ticketing.Infrastructure.Customers;
 using Eventify.Modules.Ticketing.Infrastructure.Database;
@@ -41,5 +42,6 @@ public static class TicketingModule
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TicketingDbContext>());
         services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<CartService>();
     }
 }
