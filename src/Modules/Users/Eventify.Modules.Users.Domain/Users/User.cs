@@ -24,9 +24,9 @@ public sealed class User : Entity
 
     public string LastName { get; private set; }
 
-    public static User Create(Guid id, string email, string firstName, string lastname)
+    public static User Create(Guid id, string email, string firstName, string lastName)
     {
-        var user = new User(id, email, firstName, lastname);
+        var user = new User(id, email, firstName, lastName);
         user.Raise(new UserRegistered(id));
 
         return user;

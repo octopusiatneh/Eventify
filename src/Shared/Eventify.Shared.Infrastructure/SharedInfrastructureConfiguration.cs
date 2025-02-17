@@ -2,6 +2,7 @@
 using Eventify.Shared.Application.Caching;
 using Eventify.Shared.Application.Clock;
 using Eventify.Shared.Application.Database;
+using Eventify.Shared.Infrastructure.Authentication;
 using Eventify.Shared.Infrastructure.Bus;
 using Eventify.Shared.Infrastructure.Caching;
 using Eventify.Shared.Infrastructure.Clock;
@@ -28,9 +29,12 @@ public static class SharedInfrastructureConfiguration
             opts => configuration.GetSection(DbConnectionStringOptions.DbConnectionString)
         );
         services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
+        
         services.TryAddSingleton<PublishDomainEventInterceptor>();
         services.TryAddSingleton<IDateTimeProvider, DateTimeProvider>();
         services.TryAddSingleton<IEventBus, EventBus>();
+
+        services.AddAuthenticationInternal();
         services.AddMassTransit(configure =>
         {
             Array.ForEach(moduleConfigureConsumers, configureConsumer => configureConsumer(configure));

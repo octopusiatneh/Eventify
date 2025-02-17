@@ -5,7 +5,7 @@ namespace Eventify.Shared.Infrastructure.Authentication;
 
 internal static class AuthenticationExtensions
 {
-    internal static IServiceCollection AddAuthentication(this IServiceCollection services)
+    internal static IServiceCollection AddAuthenticationInternal(this IServiceCollection services)
     {
         services.AddAuthorization();
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
