@@ -5,11 +5,15 @@
     <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="9.0.0" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
     <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="9.0.0" />
-    <PackageReference Include="EFCore.NamingConventions" Version="9.0.0" />
+    <PackageReference Include="EFCore.NamingConventions" Version="8.0.3" />
     <PackageReference Include="MassTransit" Version="8.3.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.0" />
-	  <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.3" />
+	<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,8 @@
 ﻿using Eventify.Modules.Users.Application.Abstractions.Data;
+using Eventify.Modules.Users.Application.Abstractions.Identity;
 using Eventify.Modules.Users.Domain.Users;
 using Eventify.Modules.Users.Infrastructure.Database;
+using Eventify.Modules.Users.Infrastructure.Identity;
 using Eventify.Modules.Users.Infrastructure.Users;
 using Eventify.Modules.Users.Presentation;
 using Eventify.Shared.Infrastructure.Interceptors;
@@ -9,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Eventify.Modules.Users.Infrastructure;
 
@@ -26,12 +29,22 @@ public static class UsersModule
 
     private static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        var databaseConnectionString = configuration.GetConnectionString("Database")!;
+        services.Configure<KeyCloakOptions>(configuration.GetSection("Users:KeyCloak"));
 
+        services.AddTransient<KeyCloakAuthDelegatingHandler>();
+        services.AddTransient<IIdentityProviderService, IdentityProviderService>();
+
+        services
+            .AddHttpClient<KeyCloakClient>((sp, httpClient) =>
+            {
+                KeyCloakOptions keyCloakOptions = sp.GetRequiredService<IOptions<KeyCloakOptions>>().Value;
+                httpClient.BaseAddress = new Uri(keyCloakOptions.AdminUrl);
+            })
+            .AddHttpMessageHandler<KeyCloakAuthDelegatingHandler>();
         services.AddDbContext<UsersDbContext>((sp, options) =>
             options
                 .UseNpgsql(
-                    databaseConnectionString,
+                    configuration.GetConnectionString("Database")!,
                     npgsqlOptions =>
                         npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Users)
                 )

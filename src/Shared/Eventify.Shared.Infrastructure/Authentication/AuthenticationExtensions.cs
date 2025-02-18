@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Eventify.Shared.Infrastructure.Authentication;
 

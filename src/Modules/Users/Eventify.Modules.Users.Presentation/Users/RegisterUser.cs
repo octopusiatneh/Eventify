@@ -11,10 +11,11 @@ internal sealed class RegisterUser : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("users", async (Request request, ISender sender) =>
+        app.MapPost("users/register", async (Request request, ISender sender) =>
             {
                 var result = await sender.Send(
                     new RegisterUserCommand(request.Email,
+                    request.Password,
                     request.FirstName,
                     request.LastName));
 
@@ -23,5 +24,5 @@ internal sealed class RegisterUser : IEndpoint
             .WithTags(Tags.Users);
     }
 
-    internal sealed record Request(string Email, string FirstName, string LastName);
+    internal sealed record Request(string Email, string Password, string FirstName, string LastName);
 }

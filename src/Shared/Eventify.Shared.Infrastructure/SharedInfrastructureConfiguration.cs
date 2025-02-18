@@ -8,7 +8,6 @@ using Eventify.Shared.Infrastructure.Caching;
 using Eventify.Shared.Infrastructure.Clock;
 using Eventify.Shared.Infrastructure.Data;
 using Eventify.Shared.Infrastructure.Interceptors;
-using Eventify.Shared.Infrastructure.Options;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,11 +24,8 @@ public static class SharedInfrastructureConfiguration
         IConfiguration configuration,
         Action<IRegistrationConfigurator>[] moduleConfigureConsumers)
     {
-        services.Configure<DbConnectionStringOptions>(
-            opts => configuration.GetSection(DbConnectionStringOptions.DbConnectionString)
-        );
         services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
-        
+
         services.TryAddSingleton<PublishDomainEventInterceptor>();
         services.TryAddSingleton<IDateTimeProvider, DateTimeProvider>();
         services.TryAddSingleton<IEventBus, EventBus>();

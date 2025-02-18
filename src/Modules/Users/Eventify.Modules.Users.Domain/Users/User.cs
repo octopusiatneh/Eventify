@@ -8,12 +8,13 @@ public sealed class User : Entity
     {
     }
 
-    public User(Guid id, string email, string firstName, string lastName)
+    private User(Guid id, string email, string firstName, string lastName, string identityId)
     {
         Id = id;
         Email = email;
         FirstName = firstName;
         LastName = lastName;
+        IdentityId = identityId;
     }
 
     public Guid Id { get; private set; }
@@ -24,9 +25,12 @@ public sealed class User : Entity
 
     public string LastName { get; private set; }
 
-    public static User Create(Guid id, string email, string firstName, string lastName)
+    public string IdentityId { get; private set; }
+
+    public static User Create(string email, string firstName, string lastName, string identityId)
     {
-        var user = new User(id, email, firstName, lastName);
+        var id = Guid.NewGuid();
+        var user = new User(id, email, firstName, lastName, identityId);
         user.Raise(new UserRegistered(id));
 
         return user;
