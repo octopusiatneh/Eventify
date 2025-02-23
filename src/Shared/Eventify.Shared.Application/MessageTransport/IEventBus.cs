@@ -1,4 +1,4 @@
-﻿namespace Eventify.Shared.Application.Bus;
+﻿namespace Eventify.Shared.Application.MessageTransport;
 
 public interface IEventBus
 {

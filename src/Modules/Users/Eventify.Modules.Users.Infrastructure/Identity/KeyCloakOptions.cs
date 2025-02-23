@@ -1,4 +1,4 @@
-namespace Eventify.Modules.Users.Application.Abstractions.Identity;
+namespace Eventify.Modules.Users.Infrastructure.Identity;
 
 public sealed class KeyCloakOptions
 {

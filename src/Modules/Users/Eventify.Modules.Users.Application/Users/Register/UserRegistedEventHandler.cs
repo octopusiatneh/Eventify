@@ -1,8 +1,8 @@
 ﻿using Eventify.Modules.Users.Application.Users.Get;
 using Eventify.Modules.Users.Domain.Users;
 using Eventify.Modules.Users.MessageContracts.IntegrationMessages;
-using Eventify.Shared.Application.Bus;
 using Eventify.Shared.Application.CQRS;
+using Eventify.Shared.Application.MessageTransport;
 using MediatR;
 
 namespace Eventify.Modules.Users.Application.Users.Register;

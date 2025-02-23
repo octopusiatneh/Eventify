@@ -17,7 +17,7 @@ public sealed class RegisterUserHandler(IIdentityProviderService identityProvide
             new UserModel(email, password, firstName, lastName),
             cancellationToken
         );
-        
+
         return await registerUserResult.Match(
             onSuccess: async (identityId) =>
             {

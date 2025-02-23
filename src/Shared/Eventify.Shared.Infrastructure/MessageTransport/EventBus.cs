@@ -1,7 +1,7 @@
-﻿using Eventify.Shared.Application.Bus;
+﻿using Eventify.Shared.Application.MessageTransport;
 using MassTransit;
 
-namespace Eventify.Shared.Infrastructure.Bus;
+namespace Eventify.Shared.Infrastructure.MessageTransport;
 
 internal sealed class EventBus(IBus bus) : IEventBus
 {

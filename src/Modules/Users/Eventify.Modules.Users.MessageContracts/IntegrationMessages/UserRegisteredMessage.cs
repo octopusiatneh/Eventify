@@ -1,4 +1,4 @@
-﻿using Eventify.Shared.Application.Bus;
+﻿using Eventify.Shared.Application.MessageTransport;
 
 namespace Eventify.Modules.Users.MessageContracts.IntegrationMessages;
 

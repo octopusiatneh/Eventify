@@ -29,7 +29,7 @@ public class Result<TValue>(TValue? value, bool isSuccess, Error error)
 
     public TResponse Match<TResponse>(Func<TValue, TResponse> onSuccess, Func<Error, TResponse> onFailure)
         => IsSuccess ? onSuccess(Value) : onFailure(Error);
-    
+
     public async Task<TResponse> Match<TResponse>(Func<TValue, Task<TResponse>> onSuccess, Func<Error, TResponse> onFailure)
         => IsSuccess ? await onSuccess(Value) : onFailure(Error);
 

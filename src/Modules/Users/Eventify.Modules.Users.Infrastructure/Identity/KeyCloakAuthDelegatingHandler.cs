@@ -3,7 +3,7 @@ using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Extensions.Options;
 
-namespace Eventify.Modules.Users.Application.Abstractions.Identity;
+namespace Eventify.Modules.Users.Infrastructure.Identity;
 
 public sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> options) : DelegatingHandler
 {
@@ -11,10 +11,10 @@ public sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> opti
         HttpRequestMessage request,
         CancellationToken cancellationToken)
     {
-        AuthToken authToken = await GetAuthTokenAsync(cancellationToken);
+        var authToken = await GetAuthTokenAsync(cancellationToken);
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", authToken.AccessToken);
 
-        HttpResponseMessage responseMessage = await base.SendAsync(request, cancellationToken);
+        var responseMessage = await base.SendAsync(request, cancellationToken);
         responseMessage.EnsureSuccessStatusCode();
 
         return responseMessage;
@@ -22,7 +22,7 @@ public sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> opti
 
     private async Task<AuthToken> GetAuthTokenAsync(CancellationToken cancellationToken)
     {
-        KeyCloakOptions keyCloakOptions = options.Value;
+        var keyCloakOptions = options.Value;
         KeyValuePair<string, string>[] authRequestParameters = [
             new("client_id", keyCloakOptions.ConfidentialClientId),
             new("client_secret", keyCloakOptions.ConfidentialClientSecret),
@@ -35,7 +35,7 @@ public sealed class KeyCloakAuthDelegatingHandler(IOptions<KeyCloakOptions> opti
         {
             Content = authRequestContent
         };
-        using HttpResponseMessage authResponse = await base.SendAsync(authRequest, cancellationToken);
+        using var authResponse = await base.SendAsync(authRequest, cancellationToken);
         authResponse.EnsureSuccessStatusCode();
 
         return await authResponse.Content.ReadFromJsonAsync<AuthToken>(cancellationToken)

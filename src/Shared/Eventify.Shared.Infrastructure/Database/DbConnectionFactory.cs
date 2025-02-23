@@ -2,7 +2,7 @@
 using Eventify.Shared.Application.Database;
 using Npgsql;
 
-namespace Eventify.Shared.Infrastructure.Data;
+namespace Eventify.Shared.Infrastructure.Database;
 
 public sealed class DbConnectionFactory(NpgsqlDataSource dataSource) : IDbConnectionFactory
 {
