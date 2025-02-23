@@ -27,9 +27,18 @@ public class Result<TValue>(TValue? value, bool isSuccess, Error error)
         ? value!
         : throw new InvalidOperationException("The value of a failure result can't be accessed");
 
-    public static implicit operator Result<TValue>(TValue? value) =>
-        value is not null ? Success(value) : Failure<TValue>(Error.NullValue);
+    public TResponse Match<TResponse>(Func<TValue, TResponse> onSuccess, Func<Error, TResponse> onFailure)
+        => IsSuccess ? onSuccess(Value) : onFailure(Error);
+    
+    public async Task<TResponse> Match<TResponse>(Func<TValue, Task<TResponse>> onSuccess, Func<Error, TResponse> onFailure)
+        => IsSuccess ? await onSuccess(Value) : onFailure(Error);
 
-    public static Result<TValue> ValidationFailure(Error error) =>
-        new(default, false, error);
+    public static Result<TValue> ValidationFailure(Error error)
+        => new(default, false, error);
+
+    public static implicit operator Result<TValue>(TValue? value)
+        => value is not null ? Success(value) : Failure<TValue>(Error.NullValue);
+
+    public static implicit operator Result<TValue>(Error error)
+        => Failure<TValue>(error);
 }

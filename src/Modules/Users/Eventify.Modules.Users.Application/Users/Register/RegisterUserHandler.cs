@@ -13,19 +13,22 @@ public sealed class RegisterUserHandler(IIdentityProviderService identityProvide
     public async Task<Result<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         var (email, password, firstName, lastName) = request;
+        var registerUserResult = await identityProviderService.RegisterUserAsync(
+            new UserModel(email, password, firstName, lastName),
+            cancellationToken
+        );
+        
+        return await registerUserResult.Match(
+            onSuccess: async (identityId) =>
+            {
+                var user = User.Create(email, firstName, lastName, identityId);
 
-        var userModel = new UserModel(email, password, firstName, lastName);
-        var result = await identityProviderService.RegisterUserAsync(userModel, cancellationToken);
-        if (result.IsFailure)
-        {
-            return Result.Failure<Guid>(result.Error);
-        }
+                await userRepository.InsertAsync(user, cancellationToken);
+                await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        var identityId = result.Value;
-        var user = User.Create(email, firstName, lastName, identityId);
-        await userRepository.InsertAsync(user, cancellationToken);
-        await unitOfWork.SaveChangesAsync(cancellationToken);
-
-        return user.Id;
+                return Result.Success(user.Id);
+            },
+            onFailure: Result.Failure<Guid>
+        );
     }
 }

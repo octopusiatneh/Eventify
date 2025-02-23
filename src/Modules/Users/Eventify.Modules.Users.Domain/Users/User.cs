@@ -8,15 +8,6 @@ public sealed class User : Entity
     {
     }
 
-    private User(Guid id, string email, string firstName, string lastName, string identityId)
-    {
-        Id = id;
-        Email = email;
-        FirstName = firstName;
-        LastName = lastName;
-        IdentityId = identityId;
-    }
-
     public Guid Id { get; private set; }
 
     public string Email { get; private set; }
@@ -27,11 +18,21 @@ public sealed class User : Entity
 
     public string IdentityId { get; private set; }
 
+    public List<Role> Roles { get; private set; } = [];
+
     public static User Create(string email, string firstName, string lastName, string identityId)
     {
-        var id = Guid.NewGuid();
-        var user = new User(id, email, firstName, lastName, identityId);
-        user.Raise(new UserRegistered(id));
+        var user = new User
+        {
+            Id = Guid.NewGuid(),
+            Email = email,
+            FirstName = firstName,
+            LastName = lastName,
+            IdentityId = identityId,
+            Roles = [Role.Member],
+        };
+
+        user.Raise(new UserRegistered(user.Id));
 
         return user;
     }

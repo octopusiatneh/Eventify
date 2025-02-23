@@ -2,9 +2,9 @@ using Eventify.Modules.Users.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Eventify.Modules.Users.Infrastructure.Users;
+namespace Eventify.Modules.Users.Infrastructure.Users.EntitiesConfiguration;
 
-public class UserConfiguration : IEntityTypeConfiguration<User>
+internal sealed class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
