@@ -2,7 +2,7 @@ using Eventify.Modules.Users.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Eventify.Modules.Users.Infrastructure.Users.EntitiesConfiguration;
+namespace Eventify.Modules.Users.Infrastructure.Users.Configuration;
 
 internal sealed class PermissionConfiguration : IEntityTypeConfiguration<Permission>
 {

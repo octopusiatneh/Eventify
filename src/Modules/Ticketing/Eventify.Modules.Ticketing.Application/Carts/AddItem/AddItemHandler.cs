@@ -1,9 +1,11 @@
-﻿using Eventify.Shared.Application.CQRS;
+﻿using Eventify.Modules.Ticketing.Application.Abstractions;
+using Eventify.Modules.Ticketing.Application.Carts.DTOs;
+using Eventify.Shared.Application.CQRS;
 using Eventify.Shared.Domain;
 
-namespace Eventify.Modules.Ticketing.Application.Cart.AddItem;
+namespace Eventify.Modules.Ticketing.Application.Carts.AddItem;
 
-internal sealed class AddItemHandler(CartService cartService) : ICommandHandler<AddItemCommand>
+internal sealed class AddItemHandler(ICartService cartService) : ICommandHandler<AddItemCommand>
 {
     public async Task<Result> Handle(AddItemCommand request, CancellationToken cancellationToken)
     {

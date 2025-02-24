@@ -2,6 +2,7 @@
 using Eventify.Shared.Application.Database;
 using Eventify.Shared.Application.MessageTransport;
 using Eventify.Shared.Infrastructure.Authentication;
+using Eventify.Shared.Infrastructure.Authorization;
 using Eventify.Shared.Infrastructure.Caching;
 using Eventify.Shared.Infrastructure.Clock;
 using Eventify.Shared.Infrastructure.Database;
@@ -21,13 +22,15 @@ public static class SharedInfrastructureConfiguration
         IConfiguration configuration,
         Action<IRegistrationConfigurator>[] moduleConfigureConsumers)
     {
+        services.AddEventifyAuthorization();
+        services.AddEventifyAuthentication();
+
         services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
 
         services.TryAddSingleton<PublishDomainEventInterceptor>();
         services.TryAddSingleton<IDateTimeProvider, DateTimeProvider>();
         services.TryAddSingleton<IEventBus, EventBus>();
 
-        services.AddEventifyAuthentication();
         services.AddPostgres(configuration);
         services.AddRedisCaching(configuration);
         services.AddMassTransit(moduleConfigureConsumers);

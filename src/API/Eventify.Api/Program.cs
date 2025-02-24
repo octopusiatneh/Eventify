@@ -60,4 +60,4 @@ app.UseExceptionHandler();
 app.UseAuthentication();
 app.UseAuthorization();
 
-await app.RunAsync();
+app.Run();

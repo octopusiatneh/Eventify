@@ -1,4 +1,4 @@
-﻿using Eventify.Modules.Ticketing.Application.Cart.AddItem;
+﻿using Eventify.Modules.Ticketing.Application.Carts.AddItem;
 using Eventify.Shared.Presentation.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Builder;

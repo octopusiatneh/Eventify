@@ -1,8 +1,10 @@
-﻿using Eventify.Shared.Application.Caching;
+﻿using Eventify.Modules.Ticketing.Application.Abstractions;
+using Eventify.Modules.Ticketing.Application.Carts.DTOs;
+using Eventify.Shared.Application.Caching;
 
-namespace Eventify.Modules.Ticketing.Application.Cart;
+namespace Eventify.Modules.Ticketing.Infrastructure.Carts;
 
-public sealed class CartService(ICacheService cacheService)
+public sealed class CartService(ICacheService cacheService) : ICartService
 {
     private static readonly TimeSpan DefaultExpiration = TimeSpan.FromMinutes(20);
 
@@ -45,7 +47,7 @@ public sealed class CartService(ICacheService cacheService)
 
     public async Task RemoveItemAsync(Guid customerId, Guid ticketTypeId, CancellationToken cancellationToken = default)
     {
-        string cacheKey = CreateCacheKey(customerId);
+        var cacheKey = CreateCacheKey(customerId);
 
         Cart cart = await GetAsync(customerId, cancellationToken);
 

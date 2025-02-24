@@ -1,6 +1,6 @@
-﻿using Eventify.Modules.Ticketing.Application.Abstractions.Data;
-using Eventify.Modules.Ticketing.Application.Cart;
+﻿using Eventify.Modules.Ticketing.Application.Abstractions;
 using Eventify.Modules.Ticketing.Domain.Customers;
+using Eventify.Modules.Ticketing.Infrastructure.Carts;
 using Eventify.Modules.Ticketing.Infrastructure.Customers;
 using Eventify.Modules.Ticketing.Infrastructure.Database;
 using Eventify.Modules.Ticketing.Presentation;
@@ -32,16 +32,16 @@ public static class TicketingModule
 
     private static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<TicketingDbContext>((sp, options) => options
-            .UseNpgsql(
-                configuration.GetConnectionString("Database"),
-                npgsqlOptions =>
-                    npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Ticketing))
-            .UseSnakeCaseNamingConvention()
-            .AddInterceptors(sp.GetRequiredService<PublishDomainEventInterceptor>()));
+        services
+            .AddDbContext<TicketingDbContext>((sp, options) => options
+                .UseNpgsql(
+                    configuration.GetConnectionString("Database"),
+                    npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Ticketing))
+                .UseSnakeCaseNamingConvention()
+                .AddInterceptors(sp.GetRequiredService<PublishDomainEventInterceptor>()));
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TicketingDbContext>());
         services.AddScoped<ICustomerRepository, CustomerRepository>();
-        services.AddScoped<CartService>();
+        services.AddScoped<ICartService, CartService>();
     }
 }

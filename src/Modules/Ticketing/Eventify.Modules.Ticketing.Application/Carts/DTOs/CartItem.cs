@@ -1,3 +1,3 @@
-﻿namespace Eventify.Modules.Ticketing.Application.Cart;
+﻿namespace Eventify.Modules.Ticketing.Application.Carts.DTOs;
 
 public sealed record CartItem(Guid TicketTypeId, int Quantity);

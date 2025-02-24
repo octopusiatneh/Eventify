@@ -1,4 +1,4 @@
-﻿using Eventify.Modules.Ticketing.Application.Abstractions.Data;
+﻿using Eventify.Modules.Ticketing.Application.Abstractions;
 using Eventify.Modules.Ticketing.Domain.Customers;
 using Microsoft.EntityFrameworkCore;
 

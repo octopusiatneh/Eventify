@@ -1,6 +1,6 @@
-﻿using Eventify.Modules.Users.Application.Abstractions.Data;
+﻿using Eventify.Modules.Users.Application.Abstractions;
 using Eventify.Modules.Users.Domain.Users;
-using Eventify.Modules.Users.Infrastructure.Users.EntitiesConfiguration;
+using Eventify.Modules.Users.Infrastructure.Users.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace Eventify.Modules.Users.Infrastructure.Database;

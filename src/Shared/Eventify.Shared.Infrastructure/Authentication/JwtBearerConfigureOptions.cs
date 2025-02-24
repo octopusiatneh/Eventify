@@ -5,12 +5,17 @@ using Microsoft.Extensions.Options;
 namespace Eventify.Shared.Infrastructure.Authentication;
 
 internal sealed class JwtBearerConfigureOptions(IConfiguration configuration)
-    : IConfigureOptions<JwtBearerOptions>
+    : IConfigureNamedOptions<JwtBearerOptions>
 {
     private const string ConfigurationSectionName = "Authentication";
 
     public void Configure(JwtBearerOptions options)
     {
         configuration.GetSection(ConfigurationSectionName).Bind(options);
+    }
+
+    public void Configure(string? name, JwtBearerOptions options)
+    {
+        Configure(options);
     }
 }

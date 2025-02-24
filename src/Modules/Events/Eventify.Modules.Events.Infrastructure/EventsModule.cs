@@ -1,4 +1,4 @@
-﻿using Eventify.Modules.Events.Application.Abstractions.Data;
+﻿using Eventify.Modules.Events.Application.Abstractions;
 using Eventify.Modules.Events.Domain.Categories;
 using Eventify.Modules.Events.Domain.Events;
 using Eventify.Modules.Events.Domain.TicketTypes;
@@ -29,16 +29,13 @@ public static class EventsModule
 
     private static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        var databaseConnectionString = configuration.GetConnectionString("Database")!;
-
-        services.AddDbContext<EventsDbContext>((sp, options) => options
-            .UseNpgsql(
-                databaseConnectionString,
-                npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Events)
-            )
-            .UseSnakeCaseNamingConvention()
-            .AddInterceptors(sp.GetRequiredService<PublishDomainEventInterceptor>())
-        );
+        services
+            .AddDbContext<EventsDbContext>((sp, options) => options
+                .UseNpgsql(
+                    configuration.GetConnectionString("Database")!,
+                    npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Events))
+                .UseSnakeCaseNamingConvention()
+                .AddInterceptors(sp.GetRequiredService<PublishDomainEventInterceptor>()));
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<EventsDbContext>());
         services.AddScoped<IEventRepository, EventRepository>();

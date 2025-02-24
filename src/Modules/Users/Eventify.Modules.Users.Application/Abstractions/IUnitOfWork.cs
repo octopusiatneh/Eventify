@@ -1,4 +1,4 @@
-﻿namespace Eventify.Modules.Users.Application.Abstractions.Data;
+﻿namespace Eventify.Modules.Users.Application.Abstractions;
 
 public interface IUnitOfWork
 {

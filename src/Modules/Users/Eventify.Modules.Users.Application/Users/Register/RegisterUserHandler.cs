@@ -1,4 +1,4 @@
-﻿using Eventify.Modules.Users.Application.Abstractions.Data;
+﻿using Eventify.Modules.Users.Application.Abstractions;
 using Eventify.Modules.Users.Application.Abstractions.Identity;
 using Eventify.Modules.Users.Domain.Users;
 using Eventify.Shared.Application.CQRS;
