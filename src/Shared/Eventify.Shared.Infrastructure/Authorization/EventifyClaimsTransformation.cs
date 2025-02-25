@@ -29,7 +29,6 @@ internal sealed class EventifyClaimsTransformation(IServiceScopeFactory serviceS
         return principal;
     }
 
-
     /// <summary>
     /// Transforms the given <see cref="ClaimsPrincipal"/> by adding claims based on the provided <see cref="PermissionsResponse"/>.
     /// </summary>

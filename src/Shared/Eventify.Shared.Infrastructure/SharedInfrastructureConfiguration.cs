@@ -22,8 +22,8 @@ public static class SharedInfrastructureConfiguration
         IConfiguration configuration,
         Action<IRegistrationConfigurator>[] moduleConfigureConsumers)
     {
-        services.AddEventifyAuthorization();
         services.AddEventifyAuthentication();
+        services.AddEventifyAuthorization();
 
         services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
 
