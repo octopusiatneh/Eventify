@@ -27,7 +27,7 @@ internal sealed class PermissionService(IDbConnectionFactory dbConnectionFactory
         {
             return new PermissionsResponse(
                 permissions[0].UserId,
-                permissions.Select(p => p.Permission).ToHashSet()
+                [.. permissions.Select(p => p.Permission)]
             );
         }
 

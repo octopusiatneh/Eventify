@@ -23,8 +23,6 @@ public static class ClaimsPrincipalExtensions
         var permissionClaims = principal?.FindAll(EventifyClaims.Permission)
             ?? throw new EventifyException("permissions is missing");
 
-        return permissionClaims
-            .Select(x => x.Value)
-            .ToHashSet();
+        return [.. permissionClaims.Select(x => x.Value)];
     }
 }
