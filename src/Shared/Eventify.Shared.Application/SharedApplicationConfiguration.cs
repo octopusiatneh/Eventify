@@ -9,12 +9,12 @@ public static class SharedApplicationConfiguration
 {
     public static IServiceCollection AddSharedApplicationConfig(this IServiceCollection services, Assembly[] moduleAssemblies)
     {
-        services.AddMediatR(ConfigureMediatr);
+        services.AddMediatR(ConfigureMediatR);
         services.AddValidatorsFromAssemblies(moduleAssemblies, includeInternalTypes: true);
 
         return services;
 
-        void ConfigureMediatr(MediatRServiceConfiguration config)
+        void ConfigureMediatR(MediatRServiceConfiguration config)
         {
             config.RegisterServicesFromAssemblies(moduleAssemblies);
 

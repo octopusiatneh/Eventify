@@ -31,7 +31,8 @@ builder.Services.AddSharedInfrastructureConfig(builder.Configuration, [Ticketing
 // Add Healthcheck
 builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
-    .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
+    .AddRedis(builder.Configuration.GetConnectionString("Redis")!)
+    .AddUrlGroup(new Uri(builder.Configuration.GetValue<string>("KeyCloak:HealthUrl")!), httpMethod: HttpMethod.Get, "keycloark");
 
 // Add Modules
 builder.Services.AddEventsModule(builder.Configuration);
@@ -56,4 +57,7 @@ app.MapHealthChecks("health", new HealthCheckOptions
 app.UseSerilogRequestLogging();
 app.UseExceptionHandler();
 
-await app.RunAsync();
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.Run();

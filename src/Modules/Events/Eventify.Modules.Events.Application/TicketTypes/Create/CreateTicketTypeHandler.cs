@@ -1,4 +1,4 @@
-﻿using Eventify.Modules.Events.Application.Abstractions.Data;
+﻿using Eventify.Modules.Events.Application.Abstractions;
 using Eventify.Modules.Events.Domain.Events;
 using Eventify.Modules.Events.Domain.TicketTypes;
 using Eventify.Shared.Application.CQRS;

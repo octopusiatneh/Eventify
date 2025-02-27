@@ -2,4 +2,4 @@
 
 namespace Eventify.Modules.Users.Application.Users.Register;
 
-public sealed record RegisterUserCommand(string Email, string FirstName, string LastName) : ICommand<Guid>;
+public sealed record RegisterUserCommand(string Email, string Password, string FirstName, string LastName) : ICommand<Guid>;

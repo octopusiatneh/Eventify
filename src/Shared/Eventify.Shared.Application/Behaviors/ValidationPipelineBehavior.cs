@@ -60,14 +60,13 @@ internal sealed class ValidationPipelineBehavior<TRequest, TResponse>(IEnumerabl
         ValidationResult[] validationResults = await Task.WhenAll(
             validators.Select(validator => validator.ValidateAsync(context)));
 
-        ValidationFailure[] validationErrors = validationResults
+        ValidationFailure[] validationErrors = [.. validationResults
             .Where(validationResult => !validationResult.IsValid)
-            .SelectMany(validationResult => validationResult.Errors)
-            .ToArray();
+            .SelectMany(validationResult => validationResult.Errors)];
 
         return validationErrors;
     }
 
     private static ValidationError ToValidationError(ValidationFailure[] validationFailures) =>
-        new(validationFailures.Select(f => Error.Problem(f.PropertyName, f.ErrorMessage)).ToArray());
+        new([.. validationFailures.Select(f => Error.Problem(f.PropertyName, f.ErrorMessage))]);
 }

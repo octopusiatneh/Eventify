@@ -9,6 +9,6 @@
 	
   <ItemGroup>
     <Folder Include="Database\Migrations\" />
-  </ItemGroup>
-
+  </ItemGroup>	
+	
 </Project>
