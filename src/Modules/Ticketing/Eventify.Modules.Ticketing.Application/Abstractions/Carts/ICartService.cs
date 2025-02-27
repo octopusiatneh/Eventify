@@ -1,6 +1,4 @@
-﻿using Eventify.Modules.Ticketing.Application.Carts.DTOs;
-
-namespace Eventify.Modules.Ticketing.Application.Abstractions;
+﻿namespace Eventify.Modules.Ticketing.Application.Abstractions.Carts;
 
 public interface ICartService
 {

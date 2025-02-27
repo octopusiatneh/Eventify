@@ -1,4 +1,4 @@
-﻿namespace Eventify.Modules.Ticketing.Presentation.Cart;
+﻿namespace Eventify.Modules.Ticketing.Presentation.Carts;
 
 internal static class Tags
 {

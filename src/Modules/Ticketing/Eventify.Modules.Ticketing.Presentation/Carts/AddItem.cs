@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Eventify.Modules.Ticketing.Presentation.Cart;
+namespace Eventify.Modules.Ticketing.Presentation.Carts;
 
 internal sealed class AddItem : IEndpoint
 {

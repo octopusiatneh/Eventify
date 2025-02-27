@@ -3,7 +3,7 @@ using Eventify.Shared.Application.CQRS;
 
 namespace Eventify.Modules.Events.Application.Events.Reschedule;
 
-internal sealed class EventRescheduledHandler : IDomainEventHandler<EventRescheduledEvent>
+internal sealed class EventRescheduledHandler : IDomainEventHandler<EventRescheduled>
 {
-    public Task Handle(EventRescheduledEvent notification, CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task Handle(EventRescheduled notification, CancellationToken cancellationToken) => Task.CompletedTask;
 }

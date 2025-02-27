@@ -1,4 +1,5 @@
 ﻿using Eventify.Modules.Ticketing.Application.Abstractions;
+using Eventify.Modules.Ticketing.Application.Abstractions.Carts;
 using Eventify.Modules.Ticketing.Domain.Customers;
 using Eventify.Modules.Ticketing.Infrastructure.Carts;
 using Eventify.Modules.Ticketing.Infrastructure.Customers;

@@ -1,5 +1,4 @@
-﻿using Eventify.Modules.Ticketing.Application.Abstractions;
-using Eventify.Modules.Ticketing.Application.Carts.DTOs;
+﻿using Eventify.Modules.Ticketing.Application.Abstractions.Carts;
 using Eventify.Shared.Application.Caching;
 
 namespace Eventify.Modules.Ticketing.Infrastructure.Carts;

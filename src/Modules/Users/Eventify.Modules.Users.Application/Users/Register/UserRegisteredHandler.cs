@@ -16,8 +16,12 @@ internal sealed class UserRegisteredHandler(ISender sender, IEventBus eventBus)
         var result = await sender.Send(new GetUserByIdQuery(notification.UserId), cancellationToken);
         var user = result.Value;
         var integrationMessage = new UserRegisteredMessage(
-            notification.Id, notification.OccurredOnUtc,
-            user.Id, user.Email, user.FirstName, user.LastName);
+            notification.Id,
+            notification.OccurredOnUtc,
+            user.Id,
+            user.Email,
+            user.FirstName,
+            user.LastName);
 
         // Publish message to module that interested
         await eventBus.PublishAsync(integrationMessage, cancellationToken);
