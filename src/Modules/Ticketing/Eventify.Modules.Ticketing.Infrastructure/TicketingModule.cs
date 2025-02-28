@@ -34,7 +34,7 @@ public static class TicketingModule
     private static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services
-            .AddDbContext<TicketingDbContext>((sp, options) => options
+            .AddDbContextPool<TicketingDbContext>((sp, options) => options
                 .UseNpgsql(
                     configuration.GetConnectionString("Database"),
                     npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Ticketing))

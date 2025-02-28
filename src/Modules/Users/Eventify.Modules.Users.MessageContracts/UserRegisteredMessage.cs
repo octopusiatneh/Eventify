@@ -1,6 +1,6 @@
 ﻿using Eventify.Shared.Application.MessageTransport;
 
-namespace Eventify.Modules.Users.MessageContracts.IntegrationMessages;
+namespace Eventify.Modules.Users.IntegrationEvent;
 
 public sealed record UserRegisteredMessage(
     Guid Id,

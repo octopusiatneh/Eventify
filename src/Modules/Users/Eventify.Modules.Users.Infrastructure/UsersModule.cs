@@ -32,7 +32,7 @@ public static class UsersModule
     private static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services
-            .AddDbContext<UsersDbContext>((sp, options) => options
+            .AddDbContextPool<UsersDbContext>((sp, options) => options
                 .UseNpgsql(
                     configuration.GetConnectionString("Database")!,
                     npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Users))

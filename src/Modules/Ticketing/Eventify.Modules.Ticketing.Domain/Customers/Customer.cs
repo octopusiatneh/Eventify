@@ -26,4 +26,10 @@ public sealed class Customer : Entity
 
     public static Customer Create(Guid id, string email, string firstName, string lastname)
         => new(id, email, firstName, lastname);
+
+    public void Update(string firstName, string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+    }
 }

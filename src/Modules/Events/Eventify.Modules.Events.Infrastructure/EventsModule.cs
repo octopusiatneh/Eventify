@@ -30,7 +30,7 @@ public static class EventsModule
     private static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services
-            .AddDbContext<EventsDbContext>((sp, options) => options
+            .AddDbContextPool<EventsDbContext>((sp, options) => options
                 .UseNpgsql(
                     configuration.GetConnectionString("Database")!,
                     npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Events))

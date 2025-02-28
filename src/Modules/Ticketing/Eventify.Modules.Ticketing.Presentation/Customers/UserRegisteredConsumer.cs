@@ -1,5 +1,5 @@
 ﻿using Eventify.Modules.Ticketing.Application.Customers.Create;
-using Eventify.Modules.Users.MessageContracts.IntegrationMessages;
+using Eventify.Modules.Users.IntegrationEvent;
 using MassTransit;
 using MediatR;
 
