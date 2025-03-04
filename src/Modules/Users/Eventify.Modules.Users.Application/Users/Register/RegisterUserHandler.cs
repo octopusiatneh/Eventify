@@ -19,12 +19,12 @@ public sealed class RegisterUserHandler(IIdentityProviderService identityProvide
         );
 
         return await identityRegistrationResult.Match(
-            onSuccess: RegisterUserAsync(email, firstName, lastName, cancellationToken),
-            onFailure: Result.Failure<Guid>
+            onSuccess: HandleIdentityRegistrationSuccess(email, firstName, lastName, cancellationToken),
+            onFailure: HandleIdentityRegistrationFailure()
         );
     }
 
-    private Func<string, Task<Result<Guid>>> RegisterUserAsync(string email, string firstName, string lastName, CancellationToken cancellationToken)
+    private Func<string, Task<Result<Guid>>> HandleIdentityRegistrationSuccess(string email, string firstName, string lastName, CancellationToken cancellationToken)
     {
         return async (identityId) =>
         {
@@ -35,5 +35,10 @@ public sealed class RegisterUserHandler(IIdentityProviderService identityProvide
 
             return Result.Success(user.Id);
         };
+    }
+
+    private Func<Error, Task<Result<Guid>>> HandleIdentityRegistrationFailure()
+    {
+        return async (error) => await Task.FromResult(Result.Failure<Guid>(error));
     }
 }
