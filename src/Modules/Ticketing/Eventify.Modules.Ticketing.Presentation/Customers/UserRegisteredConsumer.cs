@@ -1,5 +1,5 @@
 ﻿using Eventify.Modules.Ticketing.Application.Customers.Create;
-using Eventify.Modules.Users.IntegrationEvent;
+using Eventify.Modules.Users.IntegrationMessages;
 using MassTransit;
 using MediatR;
 
@@ -10,6 +10,7 @@ public sealed class UserRegisteredConsumer(ISender sender) : IConsumer<UserRegis
     public async Task Consume(ConsumeContext<UserRegisteredMessage> context)
     {
         var message = context.Message;
+        
         await sender.Send(
             new CreateCustomerCommand(message.UserId, message.Email, message.FirstName, message.LastName)
         );

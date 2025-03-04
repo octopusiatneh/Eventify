@@ -59,9 +59,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Modules.Ticketing.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Eventify.Modules.Ticketing.Infrastructure", "src\Modules\Ticketing\Eventify.Modules.Ticketing.Infrastructure\Eventify.Modules.Ticketing.Infrastructure.csproj", "{576A4CBB-51CA-4D3E-A883-1FAE4A745FFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Users.IntegrationEvent", "src\Modules\Users\Eventify.Modules.Users.MessageContracts\Eventify.Modules.Users.IntegrationEvent.csproj", "{BD56BBDC-530A-4927-BE8F-29C95BC883F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Users.IntegrationMessages", "src\Modules\Users\Eventify.Modules.Users.IntegrationMessage\Eventify.Modules.Users.IntegrationMessages.csproj", "{BD56BBDC-530A-4927-BE8F-29C95BC883F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Ticketing.IntegrationEvent", "src\Modules\Ticketing\Eventify.Modules.Ticketing.MessageContracts\Eventify.Modules.Ticketing.IntegrationEvent.csproj", "{9986F097-A7ED-4FCF-9387-8A6D4CE4E574}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventify.Modules.Ticketing.IntegrationMessages", "src\Modules\Ticketing\Eventify.Modules.Ticketing.IntegrationMessage\Eventify.Modules.Ticketing.IntegrationMessages.csproj", "{9986F097-A7ED-4FCF-9387-8A6D4CE4E574}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
