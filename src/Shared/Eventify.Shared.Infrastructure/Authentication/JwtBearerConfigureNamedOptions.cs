@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 
 namespace Eventify.Shared.Infrastructure.Authentication;
 
-internal sealed class JwtBearerConfigureNamedOptions(IConfiguration configuration) : IConfigureNamedOptions<JwtBearerOptions>
+internal sealed class JwtCreationOptions(IConfiguration configuration) : IConfigureNamedOptions<JwtBearerOptions>
 {
     private const string ConfigurationSectionName = "Authentication";
 

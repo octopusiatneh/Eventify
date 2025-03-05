@@ -10,7 +10,7 @@ public static class MessageTransportExtensions
         services.AddMassTransit(configure =>
         {
             Array.ForEach(moduleConfigureConsumers, configureConsumer => configureConsumer(configure));
-            configure.SetKebabCaseEndpointNameFormatter();
+            configure.SetSnakeCaseEndpointNameFormatter();
             configure.UsingInMemory((context, cfg) => cfg.ConfigureEndpoints(context));
         });
     }

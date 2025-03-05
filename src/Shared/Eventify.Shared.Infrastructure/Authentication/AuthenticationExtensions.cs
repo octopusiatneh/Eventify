@@ -8,6 +8,6 @@ internal static class AuthenticationExtensions
     {
         services.AddAuthentication().AddJwtBearer();
         services.AddHttpContextAccessor();
-        services.ConfigureOptions<JwtBearerConfigureNamedOptions>();
+        services.ConfigureOptions<JwtCreationOptions>();
     }
 }
