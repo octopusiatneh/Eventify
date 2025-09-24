@@ -37,7 +37,7 @@ public sealed class Payment : Entity
             CreatedAtUtc = DateTime.UtcNow
         };
 
-        payment.Raise(new PaymentCreated(payment.Id));
+        payment.Raise(new PaymentCreatedDomainEvent(payment.Id));
 
         return payment;
     }
@@ -58,11 +58,11 @@ public sealed class Payment : Entity
 
         if (Amount == AmountRefunded)
         {
-            Raise(new PaymentRefunded(Id, TransactionId, refundAmount));
+            Raise(new PaymentRefundedDomainEvent(Id, TransactionId, refundAmount));
         }
         else
         {
-            Raise(new PaymentPartiallyRefunded(Id, TransactionId, refundAmount));
+            Raise(new PaymentPartiallyRefundedDomainEvent(Id, TransactionId, refundAmount));
         }
 
         return Result.Success();

@@ -1,6 +1,6 @@
 ﻿using Eventify.Shared.Application.MessageTransport;
 
-namespace Eventify.Modules.Ticketing.IntegrationEvent;
+namespace Eventify.Modules.Ticketing.IntegrationMessages;
 
 public sealed record OrderCreatedMessage(
     Guid Id,

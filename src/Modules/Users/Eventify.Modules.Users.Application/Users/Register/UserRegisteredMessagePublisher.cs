@@ -6,9 +6,9 @@ using Eventify.Shared.Application.MessageTransport;
 namespace Eventify.Modules.Users.Application.Users.Register;
 
 internal sealed class UserRegisteredMessagePublisher(IEventBus eventBus)
-    : IDomainEventHandler<UserRegistered>
+    : IDomainEventHandler<UserRegisteredDomainEvent>
 {
-    public async Task Handle(UserRegistered notification, CancellationToken cancellationToken)
+    public async Task Handle(UserRegisteredDomainEvent notification, CancellationToken cancellationToken)
     {
         var integrationMessage = new UserRegisteredMessage(
             notification.Id,

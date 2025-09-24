@@ -1,5 +1,5 @@
-﻿using Eventify.Modules.Ticketing.Domain.Events;
-using Eventify.Modules.Ticketing.Domain.Orders;
+﻿using Eventify.Modules.Ticketing.Domain.Orders;
+using Eventify.Modules.Ticketing.Domain.TicketTypes;
 using Eventify.Shared.Domain;
 
 namespace Eventify.Modules.Ticketing.Domain.Tickets;
@@ -39,7 +39,7 @@ public sealed class Ticket : Entity
             CreatedAtUtc = DateTime.UtcNow
         };
 
-        ticket.Raise(new TicketCreated(ticket.Id));
+        ticket.Raise(new TicketCreatedDomainEvent(ticket.Id));
 
         return ticket;
     }
@@ -53,6 +53,6 @@ public sealed class Ticket : Entity
 
         Archived = true;
 
-        Raise(new TicketArchived(Id, Code));
+        Raise(new TicketArchivedDomainEvent(Id, Code));
     }
 }

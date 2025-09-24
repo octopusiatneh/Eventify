@@ -1,5 +1,5 @@
 ﻿using Eventify.Modules.Ticketing.Domain.Customers;
-using Eventify.Modules.Ticketing.Domain.Events;
+using Eventify.Modules.Ticketing.Domain.TicketTypes;
 using Eventify.Shared.Domain;
 
 namespace Eventify.Modules.Ticketing.Domain.Orders;
@@ -38,7 +38,7 @@ public sealed class Order : Entity
             CreatedAtUtc = DateTime.UtcNow
         };
 
-        order.Raise(new OrderCreated(order.Id));
+        order.Raise(new OrderCreatedDomainEvent(order.Id));
 
         return order;
     }
@@ -62,7 +62,7 @@ public sealed class Order : Entity
 
         TicketsIssued = true;
 
-        Raise(new OrderTicketsIssued(Id));
+        Raise(new OrderTicketsIssuedDomainEvent(Id));
 
         return Result.Success();
     }

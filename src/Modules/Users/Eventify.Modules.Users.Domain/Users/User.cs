@@ -32,7 +32,7 @@ public sealed class User : Entity
             Roles = [Role.Member],
         };
 
-        user.Raise(new UserRegistered(user.Id, user.Email, user.FirstName, user.LastName));
+        user.Raise(new UserRegisteredDomainEvent(user.Id, user.Email, user.FirstName, user.LastName));
 
         return user;
     }

@@ -2,4 +2,4 @@
 
 namespace Eventify.Modules.Ticketing.Application.Customers.Create;
 
-public sealed record CreateCustomerCommand(Guid Id, string Email, string FirstName, string LastName) : ICommand;
+public sealed record CreateCustomerCommand(Guid CustomerId, string Email, string FirstName, string LastName) : ICommand;

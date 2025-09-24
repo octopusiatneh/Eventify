@@ -4,7 +4,7 @@ namespace Eventify.Shared.Domain;
 
 public interface IDomainEvent : INotification
 {
-    public Guid Id { get; }
+    Guid Id { get; }
 
-    public DateTime OccurredOnUtc { get; }
+    DateTime OccurredOnUtc { get; }
 }

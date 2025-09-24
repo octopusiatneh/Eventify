@@ -48,7 +48,7 @@ public sealed class Event : Entity
         StartsAtUtc = startsAtUtc;
         EndsAtUtc = endsAtUtc;
 
-        Raise(new EventRescheduled(Id, StartsAtUtc, EndsAtUtc));
+        Raise(new EventRescheduledDomainEvent(Id, StartsAtUtc, EndsAtUtc));
     }
 
     public void Cancel()
@@ -60,16 +60,16 @@ public sealed class Event : Entity
 
         Canceled = true;
 
-        Raise(new EventCanceled(Id));
+        Raise(new EventCanceledDomainEvent(Id));
     }
 
     public void PaymentsRefunded()
     {
-        Raise(new EventPaymentsRefunded(Id));
+        Raise(new EventPaymentsRefundedDomainEvent(Id));
     }
 
     public void TicketsArchived()
     {
-        Raise(new EventTicketsArchived(Id));
+        Raise(new EventTicketsArchivedDomainEvent(Id));
     }
 }
