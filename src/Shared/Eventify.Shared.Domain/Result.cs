@@ -30,8 +30,8 @@ public class Result<TValue>(TValue? value, bool isSuccess, Error error)
     public TResponse Match<TResponse>(Func<TValue, TResponse> onSuccess, Func<Error, TResponse> onFailure)
         => IsSuccess ? onSuccess(Value) : onFailure(Error);
 
-    public async Task<TResponse> Match<TResponse>(Func<TValue, Task<TResponse>> onSuccess, Func<Error, TResponse> onFailure)
-        => IsSuccess ? await onSuccess(Value) : onFailure(Error);
+    public async Task<TResponse> Match<TResponse>(Func<TValue, Task<TResponse>> onSuccess, Func<Error, Task<TResponse>> onFailure)
+        => IsSuccess ? await onSuccess(Value) : await onFailure(Error);
 
     public static Result<TValue> ValidationFailure(Error error)
         => new(default, false, error);

@@ -34,7 +34,7 @@ public sealed class TicketType : Entity
     public static TicketType Create(Event @event, string name, string currency, decimal price, int quantity)
     {
         var ticketType = new TicketType(Guid.NewGuid(), @event.Id, name, currency, price, quantity);
-        ticketType.Raise(new TicketTypeCreated(ticketType.Id));
+        ticketType.Raise(new TicketTypeCreatedDomainEvent(ticketType.Id));
 
         return ticketType;
     }
