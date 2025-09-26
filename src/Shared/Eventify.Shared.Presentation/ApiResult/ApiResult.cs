@@ -8,6 +8,8 @@ public sealed class ApiResult
     public static IResult Ok<TValue>(TValue? value = default)
         => value is null ? Results.Ok() : Results.Ok(value);
 
+    public static IResult NoContent() => Results.NoContent();
+
     public static IResult Problem(Result result)
     {
         if (result.IsSuccess)

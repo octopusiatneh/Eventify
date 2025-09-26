@@ -6,9 +6,11 @@ using Eventify.Shared.Domain;
 
 namespace Eventify.Modules.Users.Application.Users.Register;
 
-public sealed class RegisterUserCommandHandler(IIdentityProviderService identityProviderService,
-                                        IUserRepository userRepository,
-                                        IUnitOfWork unitOfWork) : ICommandHandler<RegisterUserCommand, Guid>
+public sealed class RegisterUserCommandHandler(
+    IIdentityProviderService identityProviderService,
+    IUserRepository userRepository,
+    IUnitOfWork unitOfWork)
+    : ICommandHandler<RegisterUserCommand, Guid>
 {
     public async Task<Result<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {

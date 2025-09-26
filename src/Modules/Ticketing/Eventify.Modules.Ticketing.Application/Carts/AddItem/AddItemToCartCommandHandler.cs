@@ -4,9 +4,9 @@ using Eventify.Shared.Domain;
 
 namespace Eventify.Modules.Ticketing.Application.Carts.AddItem;
 
-internal sealed class AddItemCommandHandler(ICartService cartService) : ICommandHandler<AddItemCommand>
+internal sealed class AddItemCommandHandler(ICartService cartService) : ICommandHandler<AddItemToCartCommand>
 {
-    public async Task<Result> Handle(AddItemCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(AddItemToCartCommand request, CancellationToken cancellationToken)
     {
         var (customerId, ticketTypeId, quantity) = request;
         await cartService.AddItemAsync(customerId, new CartItem(ticketTypeId, quantity), cancellationToken);

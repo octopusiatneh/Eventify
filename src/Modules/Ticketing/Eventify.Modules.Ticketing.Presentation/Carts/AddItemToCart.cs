@@ -11,10 +11,10 @@ internal sealed class AddItem : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("cart", async (Request request, ISender sender) =>
+        app.MapPost("carts", async (Request request, ISender sender) =>
         {
             var (customerId, ticketTypeId, quantity) = request;
-            var command = new AddItemCommand(customerId, ticketTypeId, quantity);
+            var command = new AddItemToCartCommand(customerId, ticketTypeId, quantity);
             await sender.Send(command);
         }).WithTags(Tags.Cart);
     }

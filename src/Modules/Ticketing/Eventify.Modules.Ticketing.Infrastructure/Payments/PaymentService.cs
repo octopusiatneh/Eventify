@@ -1,6 +1,4 @@
-using System;
 using Eventify.Modules.Ticketing.Application.Abstractions.Payments;
-using Eventify.Modules.Ticketing.Application.Abstractions;
 
 namespace Eventify.Modules.Ticketing.Infrastructure.Payments;
 

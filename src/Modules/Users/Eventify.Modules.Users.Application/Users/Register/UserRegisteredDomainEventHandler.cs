@@ -5,7 +5,7 @@ using Eventify.Shared.Application.MessageTransport;
 
 namespace Eventify.Modules.Users.Application.Users.Register;
 
-internal sealed class UserRegisteredMessagePublisher(IEventBus eventBus)
+internal sealed class UserRegisteredDomainEventHandler(IEventBus eventBus)
     : IDomainEventHandler<UserRegisteredDomainEvent>
 {
     public async Task Handle(UserRegisteredDomainEvent notification, CancellationToken cancellationToken)
