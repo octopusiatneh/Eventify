@@ -19,7 +19,6 @@ internal sealed class GetCart : IEndpoint
 
             return result.ToApiResponse(ApiResult.Ok, ApiResult.Problem);
         })
-        .WithTags(Tags.Cart);
+        .WithTags(Tags.Carts);
     }
-
 }

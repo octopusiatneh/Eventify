@@ -2,7 +2,8 @@
   
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Eventify.Shared.Presentation\Eventify.Shared.Presentation.csproj" />
-    <ProjectReference Include="..\..\Users\Eventify.Modules.Users.IntegrationMessage\Eventify.Modules.Users.IntegrationMessages.csproj" />
+    <ProjectReference Include="..\..\Events\Eventify.Modules.Events.IntegrationEvents\Eventify.Modules.Events.IntegrationEvents.csproj" />
+    <ProjectReference Include="..\..\Users\Eventify.Modules.Users.IntegrationEvents\Eventify.Modules.Users.IntegrationEvents.csproj" />
     <ProjectReference Include="..\Eventify.Modules.Ticketing.Application\Eventify.Modules.Ticketing.Application.csproj" />
   </ItemGroup>
 

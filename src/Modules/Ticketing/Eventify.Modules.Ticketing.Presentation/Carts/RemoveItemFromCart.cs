@@ -16,17 +16,13 @@ internal sealed class RemoveItemFromCart : IEndpoint
         app.MapPut("carts/remove", async (Request request, ICustomerContext customerContext, ISender sender) =>
         {
             var result = await sender.Send(
-                new RemoveItemFromCartCommand(customerContext.CustomerId, request.TicketTypeId));
+                new RemoveItemFromCartCommand(customerContext.CustomerId, request.TicketTypeId)
+            );
 
             return result.ToApiResponse(Results.NoContent, ApiResult.Problem);
         })
-        .WithTags(Tags.Cart);
+        .WithTags(Tags.Carts);
     }
 
-
-    internal sealed class Request
-    {
-        public Guid TicketTypeId { get; init; }
-    }
-
+    internal sealed record Request(Guid TicketTypeId);
 }

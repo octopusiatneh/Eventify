@@ -1,4 +1,6 @@
-﻿using Eventify.Modules.Ticketing.Application.Carts.AddItem;
+﻿using Eventify.Modules.Ticketing.Application.Abstractions.Authentication;
+using Eventify.Modules.Ticketing.Application.Carts.AddItem;
+using Eventify.Shared.Presentation.ApiResult;
 using Eventify.Shared.Presentation.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -11,16 +13,19 @@ internal sealed class AddItem : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("carts", async (Request request, ISender sender) =>
+        app.MapPut("carts/add", async (Request request, ICustomerContext customerContext, ISender sender) =>
         {
-            var (customerId, ticketTypeId, quantity) = request;
+            var customerId = customerContext.CustomerId;
+            var (ticketTypeId, quantity) = request;
             var command = new AddItemToCartCommand(customerId, ticketTypeId, quantity);
-            await sender.Send(command);
-        }).WithTags(Tags.Cart);
+
+            var result = await sender.Send(command);
+
+            return result.ToApiResponse(ApiResult.NoContent, ApiResult.Problem);
+        }).WithTags(Tags.Carts);
     }
 
     internal sealed record Request(
-        Guid CustomerId,
         Guid TicketTypeId,
         int Quantity
     );

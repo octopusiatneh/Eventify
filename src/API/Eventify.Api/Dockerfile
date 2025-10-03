@@ -25,14 +25,22 @@ COPY ["src/Shared/Eventify.Shared.Presentation/Eventify.Shared.Presentation.cspr
 COPY ["src/Modules/Events/Eventify.Modules.Events.Application/Eventify.Modules.Events.Application.csproj", "src/Modules/Events/Eventify.Modules.Events.Application/"]
 COPY ["src/Modules/Events/Eventify.Modules.Events.Domain/Eventify.Modules.Events.Domain.csproj", "src/Modules/Events/Eventify.Modules.Events.Domain/"]
 COPY ["src/Modules/Events/Eventify.Modules.Events.Infrastructure/Eventify.Modules.Events.Infrastructure.csproj", "src/Modules/Events/Eventify.Modules.Events.Infrastructure/"]
+COPY ["src/Modules/Events/Eventify.Modules.Events.IntegrationEvents/Eventify.Modules.Events.IntegrationEvents.csproj", "src/Modules/Events/Eventify.Modules.Events.IntegrationEvents/"]
 COPY ["src/Modules/Events/Eventify.Modules.Events.Presentation/Eventify.Modules.Events.Presentation.csproj", "src/Modules/Events/Eventify.Modules.Events.Presentation/"]
 
 # Users module
 COPY ["src/Modules/Users/Eventify.Modules.Users.Application/Eventify.Modules.Users.Application.csproj", "src/Modules/Users/Eventify.Modules.Users.Application/"]
 COPY ["src/Modules/Users/Eventify.Modules.Users.Domain/Eventify.Modules.Users.Domain.csproj", "src/Modules/Users/Eventify.Modules.Users.Domain/"]
 COPY ["src/Modules/Users/Eventify.Modules.Users.Infrastructure/Eventify.Modules.Users.Infrastructure.csproj", "src/Modules/Users/Eventify.Modules.Users.Infrastructure/"]
-COPY ["src/Modules/Users/Eventify.Modules.Users.MessageContracts/Eventify.Modules.Users.MessageContracts.csproj", "src/Modules/Users/Eventify.Modules.Users.MessageContracts/"]
+COPY ["src/Modules/Users/Eventify.Modules.Users.IntegrationEvents/Eventify.Modules.Users.IntegrationEvents.csproj", "src/Modules/Users/Eventify.Modules.Users.IntegrationEvents/"]
 COPY ["src/Modules/Users/Eventify.Modules.Users.Presentation/Eventify.Modules.Users.Presentation.csproj", "src/Modules/Users/Eventify.Modules.Users.Presentation/"]
+
+# Ticketing module
+COPY ["src/Modules/Ticketing/Eventify.Modules.Ticketing.Application/Eventify.Modules.Ticketing.Application.csproj", "src/Modules/Ticketing/Eventify.Modules.Ticketing.Application/"]
+COPY ["src/Modules/Ticketing/Eventify.Modules.Ticketing.Domain/Eventify.Modules.Ticketing.Domain.csproj", "src/Modules/Ticketing/Eventify.Modules.Ticketing.Domain/"]
+COPY ["src/Modules/Ticketing/Eventify.Modules.Ticketing.Infrastructure/Eventify.Modules.Ticketing.Infrastructure.csproj", "src/Modules/Ticketing/Eventify.Modules.Ticketing.Infrastructure/"]
+COPY ["src/Modules/Ticketing/Eventify.Modules.Ticketing.IntegrationEvents/Eventify.Modules.Ticketing.IntegrationEvents.csproj", "src/Modules/Ticketing/Eventify.Modules.Ticketing.IntegrationEvents/"]
+COPY ["src/Modules/Ticketing/Eventify.Modules.Ticketing.Presentation/Eventify.Modules.Ticketing.Presentation.csproj", "src/Modules/Ticketing/Eventify.Modules.Ticketing.Presentation/"]
 
 RUN dotnet restore "./src/API/Eventify.Api/Eventify.Api.csproj"
 COPY . .

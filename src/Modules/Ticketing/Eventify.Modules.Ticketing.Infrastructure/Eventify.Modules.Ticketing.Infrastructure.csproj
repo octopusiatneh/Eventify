@@ -6,4 +6,8 @@
     <ProjectReference Include="..\Eventify.Modules.Ticketing.Presentation\Eventify.Modules.Ticketing.Presentation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Database\Migrations\" />
+  </ItemGroup>
+
 </Project>

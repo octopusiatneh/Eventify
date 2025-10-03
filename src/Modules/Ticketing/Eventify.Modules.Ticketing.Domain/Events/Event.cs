@@ -43,14 +43,6 @@ public sealed class Event : Entity
         return @event;
     }
 
-    public void Reschedule(DateTime startsAtUtc, DateTime? endsAtUtc)
-    {
-        StartsAtUtc = startsAtUtc;
-        EndsAtUtc = endsAtUtc;
-
-        Raise(new EventRescheduledDomainEvent(Id, StartsAtUtc, EndsAtUtc));
-    }
-
     public void Cancel()
     {
         if (Canceled)

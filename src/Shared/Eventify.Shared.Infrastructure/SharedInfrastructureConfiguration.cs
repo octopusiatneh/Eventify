@@ -1,13 +1,13 @@
 ﻿using Eventify.Shared.Application.Clock;
 using Eventify.Shared.Application.Database;
-using Eventify.Shared.Application.MessageTransport;
+using Eventify.Shared.Application.EventBus;
 using Eventify.Shared.Infrastructure.Authentication;
 using Eventify.Shared.Infrastructure.Authorization;
 using Eventify.Shared.Infrastructure.Caching;
 using Eventify.Shared.Infrastructure.Clock;
 using Eventify.Shared.Infrastructure.Database;
+using Eventify.Shared.Infrastructure.EventBus;
 using Eventify.Shared.Infrastructure.Interceptors;
-using Eventify.Shared.Infrastructure.MessageTransport;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,7 +29,7 @@ public static class SharedInfrastructureConfiguration
 
         services.TryAddSingleton<PublishDomainEventInterceptor>();
         services.TryAddSingleton<IDateTimeProvider, DateTimeProvider>();
-        services.TryAddSingleton<IEventBus, EventBus>();
+        services.TryAddSingleton<IEventBus, EventBus.EventBus>();
 
         services.AddPostgres(configuration);
         services.AddRedisCaching(configuration);

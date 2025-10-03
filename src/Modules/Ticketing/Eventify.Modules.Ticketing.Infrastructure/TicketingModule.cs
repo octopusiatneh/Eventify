@@ -1,11 +1,14 @@
 ﻿using Eventify.Modules.Ticketing.Application.Abstractions;
+using Eventify.Modules.Ticketing.Application.Abstractions.Authentication;
 using Eventify.Modules.Ticketing.Application.Abstractions.Carts;
+using Eventify.Modules.Ticketing.Application.Abstractions.Payments;
 using Eventify.Modules.Ticketing.Domain.Customers;
 using Eventify.Modules.Ticketing.Domain.Events;
 using Eventify.Modules.Ticketing.Domain.Orders;
 using Eventify.Modules.Ticketing.Domain.Payments;
 using Eventify.Modules.Ticketing.Domain.Tickets;
 using Eventify.Modules.Ticketing.Domain.TicketTypes;
+using Eventify.Modules.Ticketing.Infrastructure.Authentication;
 using Eventify.Modules.Ticketing.Infrastructure.Carts;
 using Eventify.Modules.Ticketing.Infrastructure.Customers;
 using Eventify.Modules.Ticketing.Infrastructure.Database;
@@ -39,6 +42,7 @@ public static class TicketingModule
     public static void ConfigureConsumers(IRegistrationConfigurator configurator)
     {
         configurator.AddConsumer<UserRegisteredConsumer>();
+        configurator.AddConsumer<EventPublishedConsumer>();
     }
 
     private static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
@@ -50,14 +54,18 @@ public static class TicketingModule
                     npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Ticketing))
                 .UseSnakeCaseNamingConvention()
                 .AddInterceptors(sp.GetRequiredService<PublishDomainEventInterceptor>()));
-
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<TicketingDbContext>());
+
+        services.AddScoped<ICustomerContext, CustomerContext>();
+
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IEventRepository, EventRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IPaymentRepository, PaymentRepository>();
         services.AddScoped<ITicketRepository, TicketRepository>();
         services.AddScoped<ITicketTypeRepository, TicketTypeRepository>();
+
+        services.AddScoped<IPaymentService, PaymentService>();
         services.AddScoped<ICartService, CartService>();
     }
 }

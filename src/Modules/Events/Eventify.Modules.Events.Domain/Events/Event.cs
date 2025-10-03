@@ -25,12 +25,13 @@ public sealed class Event : Entity
 
     public EventStatus Status { get; private set; }
 
-    public static Event Create(Category category,
-                               string title,
-                               string description,
-                               string location,
-                               DateTime startsAtUtc,
-                               DateTime? endsAtUtc)
+    public static Event Create(
+        Category category,
+        string title,
+        string description,
+        string location,
+        DateTime startsAtUtc,
+        DateTime? endsAtUtc)
     {
         var @event = new Event
         {
@@ -47,5 +48,20 @@ public sealed class Event : Entity
         @event.Raise(new EventCreatedDomainEvent(@event.Id));
 
         return @event;
+    }
+
+    public void Publish()
+    {
+        Status = EventStatus.Published;
+
+        Raise(new EventPublishedDomainEvent(Id));
+    }
+
+    public void Reschedule(DateTime? startsAtUtc, DateTime? endsAtUtc)
+    {
+        StartsAtUtc = startsAtUtc ?? StartsAtUtc;
+        EndsAtUtc = endsAtUtc;
+
+        Raise(new EventRescheduledDomainEvent(Id));
     }
 }

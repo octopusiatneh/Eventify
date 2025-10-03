@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Folder Include="Events\GetMany\" />
+    <Folder Include="Events\Publish\" />
   </ItemGroup>
 
 </Project>

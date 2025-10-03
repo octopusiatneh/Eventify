@@ -1,4 +1,4 @@
-﻿namespace Eventify.Modules.Ticketing.IntegrationMessages;
+﻿namespace Eventify.Modules.Ticketing.IntegrationEvents;
 
 public sealed record OrderItemModel(
     Guid Id,

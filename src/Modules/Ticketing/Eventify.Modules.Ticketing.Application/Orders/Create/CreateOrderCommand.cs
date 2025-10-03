@@ -2,4 +2,4 @@
 
 namespace Eventify.Modules.Ticketing.Application.Orders.Create;
 
-internal sealed record CreateOrderCommand(Guid CustomerId) : ICommand;
+public sealed record CreateOrderCommand(Guid CustomerId) : ICommand;

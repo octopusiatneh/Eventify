@@ -1,13 +1,13 @@
 ﻿using Eventify.Modules.Ticketing.Application.Customers.Create;
-using Eventify.Modules.Users.IntegrationMessages;
+using Eventify.Modules.Users.IntegrationEvents;
 using MassTransit;
 using MediatR;
 
 namespace Eventify.Modules.Ticketing.Presentation.Customers;
 
-public sealed class UserRegisteredConsumer(ISender sender) : IConsumer<UserRegisteredMessage>
+public sealed class UserRegisteredConsumer(ISender sender) : IConsumer<UserRegisteredIntegrationEvent>
 {
-    public async Task Consume(ConsumeContext<UserRegisteredMessage> context)
+    public async Task Consume(ConsumeContext<UserRegisteredIntegrationEvent> context)
     {
         var message = context.Message;
 

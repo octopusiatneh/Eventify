@@ -1,7 +1,8 @@
+using Eventify.Shared.Infrastructure.EventBus;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Eventify.Shared.Infrastructure.MessageTransport;
+namespace Eventify.Shared.Infrastructure.EventBus;
 
 public static class MessageTransportExtensions
 {

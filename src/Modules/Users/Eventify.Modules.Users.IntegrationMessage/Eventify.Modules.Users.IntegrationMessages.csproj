@@ -1,7 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\..\Shared\Eventify.Shared.Application\Eventify.Shared.Application.csproj" />
-    </ItemGroup>
-
-</Project>

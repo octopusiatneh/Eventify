@@ -2,4 +2,4 @@
 
 namespace Eventify.Modules.Events.Application.Events.Reschedule;
 
-public sealed record RescheduleEventCommand(DateTime? StartTime, DateTime? EndTime) : ICommand<Guid>;
+public sealed record RescheduleEventCommand(Guid EventId, DateTime? StartsAtUtc, DateTime? EndsAtUtc) : ICommand;
