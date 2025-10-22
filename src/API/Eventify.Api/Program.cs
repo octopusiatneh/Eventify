@@ -1,5 +1,6 @@
 using Eventify.Api.Extensions;
 using Eventify.Api.Middlewares;
+using Eventify.Api.Swagger;
 using Eventify.Modules.Events.Infrastructure;
 using Eventify.Modules.Ticketing.Infrastructure;
 using Eventify.Modules.Users.Infrastructure;
@@ -18,7 +19,7 @@ builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options => options.CustomSchemaIds(t => t.FullName?.Replace("+", ".")));
+builder.Services.AddEventifySwagger(builder.Configuration);
 
 // Add Cross-Cutting concerns
 builder.Services.AddSharedApplicationConfig([
@@ -26,9 +27,9 @@ builder.Services.AddSharedApplicationConfig([
     Eventify.Modules.Users.Application.AssemblyReference.Assembly,
     Eventify.Modules.Ticketing.Application.AssemblyReference.Assembly,
 ]);
-builder.Services.AddSharedInfrastructureConfig(builder.Configuration, [TicketingModule.ConfigureConsumers]);
+builder.Services.AddSharedInfrastructureConfig("Eventify.Api", builder.Configuration, [TicketingModule.ConfigureConsumers]);
 
-// Add Healthcheck
+// Add Health Check
 builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!)
@@ -43,9 +44,7 @@ WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-
+    app.UseEventifySwaggerUI(builder.Configuration);
     app.ApplyMigrations();
 }
 
@@ -54,6 +53,9 @@ app.MapHealthChecks("health", new HealthCheckOptions
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
+
+app.UseMiddleware<LogContextTraceLoggingMiddleware>();
+
 app.UseSerilogRequestLogging();
 app.UseExceptionHandler();
 

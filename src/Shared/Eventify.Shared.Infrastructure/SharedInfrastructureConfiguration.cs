@@ -8,6 +8,7 @@ using Eventify.Shared.Infrastructure.Clock;
 using Eventify.Shared.Infrastructure.Database;
 using Eventify.Shared.Infrastructure.EventBus;
 using Eventify.Shared.Infrastructure.Interceptors;
+using Eventify.Shared.Infrastructure.OpenTelemetry;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,7 @@ public static class SharedInfrastructureConfiguration
 {
     public static IServiceCollection AddSharedInfrastructureConfig(
         this IServiceCollection services,
+        string serviceName,
         IConfiguration configuration,
         Action<IRegistrationConfigurator>[] moduleConfigureConsumers)
     {
@@ -34,6 +36,7 @@ public static class SharedInfrastructureConfiguration
         services.AddPostgres(configuration);
         services.AddRedisCaching(configuration);
         services.AddMassTransit(moduleConfigureConsumers);
+        services.AddDistributedTracing(serviceName);
 
         return services;
     }

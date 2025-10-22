@@ -1,4 +1,5 @@
-﻿using Eventify.Shared.Domain;
+﻿using System.Diagnostics;
+using Eventify.Shared.Domain;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
@@ -17,6 +18,9 @@ internal sealed class RequestLogPipelineBehavior<TRequest, TResponse>(ILogger<Re
     {
         string moduleName = GetModuleName(typeof(TRequest).FullName!);
         string requestName = typeof(TRequest).Name;
+
+        Activity.Current?.SetTag("request.module", moduleName);
+        Activity.Current?.SetTag("request.name", requestName);
 
         using (LogContext.PushProperty("Module", moduleName))
         {
