@@ -1,3 +1,7 @@
+volumes:
+  postgres_data:
+  keycloak_data:
+
 services:
   eventify.api:
     image: ${DOCKER_REGISTRY-}eventifyapi
@@ -25,7 +29,7 @@ services:
       - KC_BOOTSTRAP_ADMIN_PASSWORD=password
     volumes:
       - ./.files/identity:/opt/keycloak/data/import
-      - ./.containers/identity:/opt/keycloak/data
+      - keycloak_data:/opt/keycloak/data
     ports:
       - 18080:8080
      
@@ -37,7 +41,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - ./.containers/db:/data/postgres
+      - postgres_data:/var/lib/postgresql/data
     restart: always
     ports:
       - 5432:5432

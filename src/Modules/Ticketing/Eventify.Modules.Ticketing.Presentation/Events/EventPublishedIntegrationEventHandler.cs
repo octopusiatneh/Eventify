@@ -3,9 +3,9 @@ using Eventify.Modules.Ticketing.Application.Events.Create;
 using MassTransit;
 using MediatR;
 
-namespace Eventify.Modules.Ticketing.Presentation.Customers;
+namespace Eventify.Modules.Ticketing.Presentation.Events;
 
-public sealed class EventPublishedConsumer(ISender sender) : IConsumer<EventPublishedIntegrationEvent>
+public sealed class EventPublishedIntegrationEventHandler(ISender sender) : IConsumer<EventPublishedIntegrationEvent>
 {
     public async Task Consume(ConsumeContext<EventPublishedIntegrationEvent> context)
     {

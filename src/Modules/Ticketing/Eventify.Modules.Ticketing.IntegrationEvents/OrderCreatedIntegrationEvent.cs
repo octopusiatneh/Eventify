@@ -6,11 +6,11 @@ public sealed class OrderCreatedIntegrationEvent : IntegrationEvent
 {
     public OrderCreatedIntegrationEvent(
         Guid id,
+        DateTime occurredOnUtc,
         Guid orderId,
         Guid customerId,
         decimal totalPrice,
         DateTime createdAtUtc,
-        DateTime occurredOnUtc,
         List<OrderItemModel> orderItems) : base(id, occurredOnUtc)
     {
         OrderId = orderId;
@@ -26,3 +26,12 @@ public sealed class OrderCreatedIntegrationEvent : IntegrationEvent
     public DateTime CreatedAtUtc { get; init; }
     public List<OrderItemModel> OrderItems { get; init; }
 }
+
+public sealed record OrderItemModel(
+    Guid Id,
+    Guid OrderId,
+    Guid TicketTypeId,
+    decimal Quantity,
+    decimal UnitPrice,
+    decimal Price,
+    string Currency);

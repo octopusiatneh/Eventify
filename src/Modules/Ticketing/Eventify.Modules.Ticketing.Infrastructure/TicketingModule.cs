@@ -19,6 +19,7 @@ using Eventify.Modules.Ticketing.Infrastructure.Tickets;
 using Eventify.Modules.Ticketing.Infrastructure.TicketTypes;
 using Eventify.Modules.Ticketing.Presentation;
 using Eventify.Modules.Ticketing.Presentation.Customers;
+using Eventify.Modules.Ticketing.Presentation.Events;
 using Eventify.Shared.Infrastructure.Interceptors;
 using Eventify.Shared.Presentation.Endpoints;
 using MassTransit;
@@ -41,8 +42,8 @@ public static class TicketingModule
 
     public static void ConfigureConsumers(IRegistrationConfigurator configurator)
     {
-        configurator.AddConsumer<UserRegisteredConsumer>();
-        configurator.AddConsumer<EventPublishedConsumer>();
+        configurator.AddConsumer<UserRegisteredIntegrationEventHandler>();
+        configurator.AddConsumer<EventPublishedIntegrationEventHandler>();
     }
 
     private static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)

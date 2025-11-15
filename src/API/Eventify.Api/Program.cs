@@ -1,6 +1,7 @@
 using Eventify.Api.Extensions;
 using Eventify.Api.Middlewares;
 using Eventify.Api.Swagger;
+using Eventify.Modules.Attendance.Infrastructure;
 using Eventify.Modules.Events.Infrastructure;
 using Eventify.Modules.Ticketing.Infrastructure;
 using Eventify.Modules.Users.Infrastructure;
@@ -23,11 +24,19 @@ builder.Services.AddEventifySwagger(builder.Configuration);
 
 // Add Cross-Cutting concerns
 builder.Services.AddSharedApplicationConfig([
+    Eventify.Modules.Attendance.Application.AssemblyReference.Assembly,
     Eventify.Modules.Events.Application.AssemblyReference.Assembly,
     Eventify.Modules.Users.Application.AssemblyReference.Assembly,
     Eventify.Modules.Ticketing.Application.AssemblyReference.Assembly,
 ]);
-builder.Services.AddSharedInfrastructureConfig("Eventify.Api", builder.Configuration, [TicketingModule.ConfigureConsumers]);
+builder.Services.AddSharedInfrastructureConfig(
+    serviceName: "Eventify.Api",
+    configuration: builder.Configuration,
+    moduleConfigureConsumers: [
+        AttendanceModule.ConfigureConsumers,
+        TicketingModule.ConfigureConsumers,
+    ]
+);
 
 // Add Health Check
 builder.Services.AddHealthChecks()
@@ -36,6 +45,7 @@ builder.Services.AddHealthChecks()
     .AddUrlGroup(new Uri(builder.Configuration.GetValue<string>("KeyCloak:HealthUrl")!), httpMethod: HttpMethod.Get, "keycloark");
 
 // Add Modules
+builder.Services.AddAttendanceModule(builder.Configuration);
 builder.Services.AddEventsModule(builder.Configuration);
 builder.Services.AddUsersModule(builder.Configuration);
 builder.Services.AddTicketingModule(builder.Configuration);
