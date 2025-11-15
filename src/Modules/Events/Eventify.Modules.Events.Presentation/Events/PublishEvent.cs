@@ -1,4 +1,4 @@
-using Eventify.Modules.Events.Application.Events.Publish;
+using Eventify.Modules.Events.Application.Events.PublishEvent;
 using Eventify.Shared.Presentation.Endpoints;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
