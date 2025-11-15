@@ -11,9 +11,9 @@ internal sealed class CreateTicketCommandHandler(
 {
     public async Task<Result> Handle(CreateTicketCommand request, CancellationToken cancellationToken)
     {
-        var (ticketId, customerId, eventId, code) = request;
+        var (ticketId, attendeeId, eventId, code) = request;
 
-        var ticket = Ticket.Create(ticketId, customerId, eventId, code);
+        var ticket = Ticket.Create(ticketId, attendeeId, eventId, code);
         await ticketRepository.InsertAsync(ticket, cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 

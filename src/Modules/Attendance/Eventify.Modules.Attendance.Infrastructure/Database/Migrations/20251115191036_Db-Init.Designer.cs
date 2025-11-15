@@ -9,10 +9,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Eventify.Modules.Attendance.Infrastructure.Database.Migrations
+namespace Eventify.Modules.Attendance.Infrastructure.Migrations
 {
     [DbContext(typeof(AttendanceDbContext))]
-    [Migration("20251113101800_Db-Init")]
+    [Migration("20251115191036_Db-Init")]
     partial class DbInit
     {
         /// <inheritdoc />
@@ -35,21 +35,28 @@ namespace Eventify.Modules.Attendance.Infrastructure.Database.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("email");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("first_name");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("last_name");
 
                     b.HasKey("Id")
                         .HasName("pk_attendees");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasDatabaseName("ix_attendees_email");
 
                     b.ToTable("attendees", "attendance");
                 });
@@ -103,7 +110,8 @@ namespace Eventify.Modules.Attendance.Infrastructure.Database.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
                         .HasColumnName("code");
 
                     b.Property<Guid>("EventId")
@@ -117,7 +125,34 @@ namespace Eventify.Modules.Attendance.Infrastructure.Database.Migrations
                     b.HasKey("Id")
                         .HasName("pk_tickets");
 
+                    b.HasIndex("AttendeeId")
+                        .HasDatabaseName("ix_tickets_attendee_id");
+
+                    b.HasIndex("UsedAtUtc")
+                        .HasDatabaseName("ix_tickets_used_at_utc");
+
+                    b.HasIndex("EventId", "Code")
+                        .IsUnique()
+                        .HasDatabaseName("ix_tickets_event_id_code");
+
                     b.ToTable("tickets", "attendance");
+                });
+
+            modelBuilder.Entity("Eventify.Modules.Attendance.Domain.Tickets.Ticket", b =>
+                {
+                    b.HasOne("Eventify.Modules.Attendance.Domain.Attendees.Attendee", null)
+                        .WithMany()
+                        .HasForeignKey("AttendeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_tickets_attendees_attendee_id");
+
+                    b.HasOne("Eventify.Modules.Attendance.Domain.Events.Event", null)
+                        .WithMany()
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_tickets_events_event_id");
                 });
 #pragma warning restore 612, 618
         }
