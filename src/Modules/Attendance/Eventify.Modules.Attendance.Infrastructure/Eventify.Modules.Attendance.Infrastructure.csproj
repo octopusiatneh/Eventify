@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Eventify.Shared.Infrastructure\Eventify.Shared.Infrastructure.csproj" />
+    <ProjectReference Include="..\Eventify.Modules.Attendance.Application\Eventify.Modules.Attendance.Application.csproj" />
+    <ProjectReference Include="..\Eventify.Modules.Attendance.Presentation\Eventify.Modules.Attendance.Presentation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Database\Migrations\" />
+  </ItemGroup>
+
+</Project>

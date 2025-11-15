@@ -42,6 +42,13 @@ COPY ["src/Modules/Ticketing/Eventify.Modules.Ticketing.Infrastructure/Eventify.
 COPY ["src/Modules/Ticketing/Eventify.Modules.Ticketing.IntegrationEvents/Eventify.Modules.Ticketing.IntegrationEvents.csproj", "src/Modules/Ticketing/Eventify.Modules.Ticketing.IntegrationEvents/"]
 COPY ["src/Modules/Ticketing/Eventify.Modules.Ticketing.Presentation/Eventify.Modules.Ticketing.Presentation.csproj", "src/Modules/Ticketing/Eventify.Modules.Ticketing.Presentation/"]
 
+# Attendance module
+COPY ["src/Modules/Attendance/Eventify.Modules.Attendance.Application/Eventify.Modules.Attendance.Application.csproj", "src/Modules/Attendance/Eventify.Modules.Attendance.Application/"]
+COPY ["src/Modules/Attendance/Eventify.Modules.Attendance.Domain/Eventify.Modules.Attendance.Domain.csproj", "src/Modules/Attendance/Eventify.Modules.Attendance.Domain/"]
+COPY ["src/Modules/Attendance/Eventify.Modules.Attendance.Infrastructure/Eventify.Modules.Attendance.Infrastructure.csproj", "src/Modules/Attendance/Eventify.Modules.Attendance.Infrastructure/"]
+COPY ["src/Modules/Attendance/Eventify.Modules.Attendance.IntegrationEvents/Eventify.Modules.Attendance.IntegrationEvents.csproj", "src/Modules/Attendance/Eventify.Modules.Attendance.IntegrationEvents/"]
+COPY ["src/Modules/Attendance/Eventify.Modules.Attendance.Presentation/Eventify.Modules.Attendance.Presentation.csproj", "src/Modules/Attendance/Eventify.Modules.Attendance.Presentation/"]
+
 RUN dotnet restore "./src/API/Eventify.Api/Eventify.Api.csproj"
 COPY . .
 WORKDIR "/src/src/API/Eventify.Api"

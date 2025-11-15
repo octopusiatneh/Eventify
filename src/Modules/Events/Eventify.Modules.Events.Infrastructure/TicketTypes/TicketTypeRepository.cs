@@ -14,4 +14,7 @@ internal sealed class TicketTypeRepository(EventsDbContext dbContext) : ITicketT
 
     public async Task<bool> ExistsByEventIdAsync(Guid eventId, CancellationToken cancellationToken = default)
         => await dbContext.TicketTypes.AnyAsync(t => t.EventId == eventId, cancellationToken);
+
+    public async Task<IReadOnlyCollection<TicketType>> GetByEventIdAsync(Guid eventId, CancellationToken cancellationToken = default)
+        => await dbContext.TicketTypes.Where(t => t.EventId == eventId).ToListAsync(cancellationToken);
 }

@@ -13,7 +13,7 @@ internal sealed class UserRegisteredDomainEventHandler(IEventBus eventBus)
         var userRegisteredIntegrationEvent = new UserRegisteredIntegrationEvent(
             notification.Id,
             notification.OccurredOnUtc,
-            notification.Id,
+            notification.UserId,
             notification.Email,
             notification.FirstName,
             notification.LastName

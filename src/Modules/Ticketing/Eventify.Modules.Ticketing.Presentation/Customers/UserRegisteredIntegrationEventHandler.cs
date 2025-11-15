@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Eventify.Modules.Ticketing.Presentation.Customers;
 
-public sealed class UserRegisteredConsumer(ISender sender) : IConsumer<UserRegisteredIntegrationEvent>
+public sealed class UserRegisteredIntegrationEventHandler(ISender sender) : IConsumer<UserRegisteredIntegrationEvent>
 {
     public async Task Consume(ConsumeContext<UserRegisteredIntegrationEvent> context)
     {

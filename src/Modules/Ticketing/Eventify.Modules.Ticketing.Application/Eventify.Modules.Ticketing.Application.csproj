@@ -1,19 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <Compile Remove="Tickets\Archieve\**" />
-    <EmbeddedResource Remove="Tickets\Archieve\**" />
-    <None Remove="Tickets\Archieve\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Eventify.Shared.Application\Eventify.Shared.Application.csproj" />
     <ProjectReference Include="..\Eventify.Modules.Ticketing.Domain\Eventify.Modules.Ticketing.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Customers\GetById\" />
-    <Folder Include="Events\" />
+    <ProjectReference Include="..\Eventify.Modules.Ticketing.IntegrationEvents\Eventify.Modules.Ticketing.IntegrationEvents.csproj" />
   </ItemGroup>
 
 </Project>
