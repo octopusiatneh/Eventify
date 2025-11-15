@@ -15,12 +15,12 @@ internal sealed class CheckInAttendee : IEndpoint
     {
         app
             .MapPut(
-                "attendees/check-in",
-                async (IAttendeeContext attendeeContext, Request request, ISender sender) =>
-                {
-                    var result = await sender.Send(new CheckInAttendeeCommand(attendeeContext.AttendeeId, request.TicketId));
+            "attendees/check-in",
+            async (IAttendeeContext attendeeContext, Request request, ISender sender) =>
+        {
+            var result = await sender.Send(new CheckInAttendeeCommand(attendeeContext.AttendeeId, request.TicketId));
 
-                    return result.ToApiResponse(ApiResult.NoContent, ApiResult.Problem);
+            return result.ToApiResponse(ApiResult.NoContent, ApiResult.Problem);
                 })
             .WithTags(Tags.Attendees);
     }
