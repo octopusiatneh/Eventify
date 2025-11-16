@@ -4,6 +4,6 @@ namespace Eventify.Modules.Attendance.Application.Tickets.Create;
 
 public sealed record CreateTicketCommand(
     Guid TicketId,
-    Guid CustomerId,
+    Guid AttendeeId,
     Guid EventId,
     string Code) : ICommand;

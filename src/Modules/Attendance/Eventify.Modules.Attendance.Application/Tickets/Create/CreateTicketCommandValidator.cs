@@ -7,7 +7,7 @@ internal sealed class CreateTicketCommandValidator : AbstractValidator<CreateTic
     public CreateTicketCommandValidator()
     {
         RuleFor(c => c.TicketId).NotEmpty();
-        RuleFor(c => c.CustomerId).NotEmpty();
+        RuleFor(c => c.AttendeeId).NotEmpty();
         RuleFor(c => c.EventId).NotEmpty();
         RuleFor(c => c.Code).NotEmpty().MaximumLength(30);
     }
