@@ -21,7 +21,7 @@ internal sealed class CheckInAttendee : IEndpoint
             var result = await sender.Send(new CheckInAttendeeCommand(attendeeContext.AttendeeId, request.TicketId));
 
             return result.ToApiResponse(ApiResult.NoContent, ApiResult.Problem);
-                })
+        })
             .WithTags(Tags.Attendees);
     }
 
